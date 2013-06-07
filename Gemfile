@@ -40,3 +40,5 @@ gem 'capistrano'
 
 # To use debugger
 # gem 'debugger'
+
+gem 'rack-ntlm', :git => 'git://github.com/lukefx/rack-ntlm.git'
