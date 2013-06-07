@@ -64,19 +64,23 @@ module Techradarcommunity
       g.test_framework :rspec
     end
 
-    if !Gem.source_index.find_name('rack-ntlm').empty?
-      config.middleware.use "Rack::Ntlm", {
-        #:uri_pattern => /\/login/                       # (default = /\//) (any URL)
-        :host => '<Active Directory hostname>',
-        :port => 389,                                   # default = 389
-        :base => 'Base namespace for LDAP search',
-        :search_filter => '(dn=%1)'                     # default = (sAMAccountName=%1)
-        :auth => {
-            :username => '<username to bind to LDAP>',
-            :password => '<password to bind to LDAP>'
-        }
-      }
-    end
+    # #if !Gem.source_index.find_name('rack-ntlm').empty?
+    # begin
+    #   require 'rack-ntlm'
+    #   config.middleware.use "Rack::Ntlm", {
+    #     #:uri_pattern => /\/login/                       # (default = /\//) (any URL)
+    #     :host => '<Active Directory hostname>',
+    #     :port => 389,                                   # default = 389
+    #     :base => 'Base namespace for LDAP search',
+    #     :search_filter => '(dn=%1)',                    # default = (sAMAccountName=%1)
+    #     :auth => {
+    #         :username => '<username to bind to LDAP>',
+    #         :password => '<password to bind to LDAP>'
+    #     }
+    #   }
+    # rescue Gem::LoadError
+    #   # NTLM gem not enabled
+    # end
 
   end
 end
