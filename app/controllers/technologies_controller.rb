@@ -15,7 +15,7 @@ class TechnologiesController < ApplicationController
   def show
     @technology = Technology.find(params[:id], :include => :product_technologies)
     if @technology.products.count > 0
-      @products_using_this = @technology.products
+      @products_using_this = @technology.product_technologies
       @products_not_using_this = Product.where('id not in (?)', @technology.product_technologies.map(&:product_id).join(','))
     else
       @products_using_this = [] # use 'none' in Rails 4

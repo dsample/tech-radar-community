@@ -3,4 +3,6 @@ class Product < ActiveRecord::Base
   has_many :technologies, :through => :product_technologies
   has_many :comments, :as => :commentable
   attr_accessible :name
+  
+  validates :name, :presence => true
 end

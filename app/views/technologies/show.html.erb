@@ -23,8 +23,8 @@
 <% if @technology.product_technologies.count > 0 %>
 <p>
 	<strong>Products using this:</strong>
-	<% @products_using_this.each do |product| %>
-		<%= product.name %>
+	<% @products_using_this.each do |pt| %>
+		<%= pt.product.name %>: <%= pt.states.last.name %>
 	<% end %>
 </p>
 <% end %>
