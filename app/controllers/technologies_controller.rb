@@ -14,6 +14,10 @@ class TechnologiesController < ApplicationController
   # GET /technologies/1.json
   def show
     @technology = Technology.find(params[:id])
+    
+    @commentable = @technology
+    @comments = @commentable.comments
+    @comment = Comment.new
 
     respond_to do |format|
       format.html # show.html.erb

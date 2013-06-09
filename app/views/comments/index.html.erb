@@ -23,3 +23,11 @@
 <br />
 
 <%= link_to 'New Comment', new_comment_path %>
+
+<% form_for [@commentable, Comment.new] do |f| %>
+  <p>
+    <%= f.label :body %>
+    <%= f.text_area :body %>
+  </p>
+  <p><%= f.submit "Submit" %></p>
+<% end %>

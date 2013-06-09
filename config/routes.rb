@@ -1,13 +1,11 @@
 Techradarcommunity::Application.routes.draw do
-  resources :comments
 
-
-  resources :products
-
-
-  resources :technologies
-
-
+  resources :products do
+    resources :comments
+  end
+  resources :technologies do
+    resources :comments
+  end
   resources :categories
 
 
@@ -60,7 +58,7 @@ Techradarcommunity::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+  root :to => 'technologies#index'
 
   # See how all your routes lay out with "rake routes"
 
