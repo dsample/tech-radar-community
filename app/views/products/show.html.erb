@@ -5,6 +5,10 @@
   <%= @product.name %>
 </p>
 
+<h2>Comments</h2>
+
+<%= render :partial => 'comments/comments' %>
+<%= render :partial => 'comments/form' %>
 
 <%= link_to 'Edit', edit_product_path(@product) %> |
 <%= link_to 'Back', products_path %>
