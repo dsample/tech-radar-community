@@ -1,6 +1,6 @@
 class ProductTechnology < ActiveRecord::Base
   belongs_to :product
-  has_one :technology
-  has_one :state
+  belongs_to :technology
+  belongs_to :state
   # attr_accessible :title, :body
 end
