@@ -13,7 +13,14 @@ class TechnologiesController < ApplicationController
   # GET /technologies/1
   # GET /technologies/1.json
   def show
-    @technology = Technology.find(params[:id])
+    @technology = Technology.find(params[:id], :include => :product_technologies)
+    if @technology.products.count > 0
+      @products_using_this = @technology.products
+      @products_not_using_this = Product.where('id not in (?)', @technology.product_technologies.map(&:product_id).join(','))
+    else
+      @products_using_this = [] # use 'none' in Rails 4
+      @products_not_using_this = Product.find(:all)
+    end
     
     @commentable = @technology
     @comments = @commentable.comments

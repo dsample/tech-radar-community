@@ -20,6 +20,24 @@
   <%= @technology.description %>
 </p>
 
+<% if @technology.product_technologies.count > 0 %>
+<p>
+	<strong>Products using this:</strong>
+	<% @products_using_this.each do |product| %>
+		<%= product.name %>
+	<% end %>
+</p>
+<% end %>
+
+<% if @products_not_using_this.count > 0 %>
+<p>
+	<strong>Products not using this yet:</strong>
+	<% @products_not_using_this.each do |product| %>
+		<%= product.name %>
+	<% end %>
+</p>
+<% end %>
+
 <h2>Comments</h2>
 
 <%= render :partial => 'comments/comments' %>
