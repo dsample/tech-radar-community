@@ -10,6 +10,13 @@
   <%= @category.description %>
 </p>
 
+<% if @category.technologies.count  %>
+<ul>
+	<% @category.technologies.each do |tech| %>
+		<li><%= link_to(tech.name, tech) %></li>
+	<% end %>
+</ul>
+<% end %>
 
 <%= link_to 'Edit', edit_category_path(@category) %> |
 <%= link_to 'Back', categories_path %>

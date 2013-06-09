@@ -14,7 +14,7 @@ class TechnologiesController < ApplicationController
   # GET /technologies/1.json
   def show
     @technology = Technology.find(params[:id], :include => :product_technologies)
-    if @technology.products.count > 0
+    if @technology.product_technologies.count > 0
       @products_using_this = @technology.product_technologies
       @products_not_using_this = Product.where('id not in (?)', @technology.product_technologies.map(&:product_id).join(','))
     else
