@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130609221137) do
+ActiveRecord::Schema.define(:version => 20130610214411) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -55,6 +55,24 @@ ActiveRecord::Schema.define(:version => 20130609221137) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "recommendations", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "recommends", :force => true do |t|
+    t.integer  "recommendable_id"
+    t.string   "recommendable_type"
+    t.integer  "recommendation_id"
+    t.text     "context"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
+  add_index "recommends", ["recommendable_id"], :name => "index_recommends_on_recommendable_id"
 
   create_table "states", :force => true do |t|
     t.string   "name"

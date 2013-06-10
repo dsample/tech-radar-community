@@ -1,0 +1,7 @@
+<div id="recommends">
+<% @recommends.each do |recommendation| %>
+  <div class="recommend">
+    <%= simple_format recommendation.context %>
+  </div>
+<% end %>
+</div>

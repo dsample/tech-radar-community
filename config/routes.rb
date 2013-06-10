@@ -5,6 +5,7 @@ Techradarcommunity::Application.routes.draw do
   end
   resources :technologies do
     resources :comments
+    resources :recommends
   end
   resources :categories
 

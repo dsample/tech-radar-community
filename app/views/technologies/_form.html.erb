@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :category %><br />
-    <%= f.select :category_id, options_for_select(@categories.map{|x| [x.name, x.id] }) %>
+    <%= f.select :category_id, options_for_select(@categories.map{|x| [x.name.titleize, x.id] }) %>
   </div>
   <div class="field">
     <%= f.label :name %><br />

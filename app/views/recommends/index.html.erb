@@ -1,0 +1,27 @@
+<h1>Listing recommends</h1>
+
+<table>
+  <tr>
+    <th>Recommendable</th>
+    <th>Recommendation</th>
+    <th>Context</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @recommends.each do |recommend| %>
+  <tr>
+    <td><%= recommend.recommendable %></td>
+    <td><%= recommend.recommendation %></td>
+    <td><%= recommend.context %></td>
+    <td><%= link_to 'Show', recommend %></td>
+    <td><%= link_to 'Edit', edit_recommend_path(recommend) %></td>
+    <td><%= link_to 'Destroy', recommend, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Recommend', new_recommend_path %>

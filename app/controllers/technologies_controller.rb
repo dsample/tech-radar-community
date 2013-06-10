@@ -15,8 +15,10 @@ class TechnologiesController < ApplicationController
   def show
     @technology = Technology.find(params[:id], :include => :product_technologies)
     if @technology.product_technologies.count > 0
-      @products_using_this = @technology.product_technologies
-      @products_not_using_this = Product.where('id not in (?)', @technology.product_technologies.map(&:product_id).join(','))
+      @products_using_this = @technology.products_using_this
+      @products_not_using_this = @technology.products_not_using_this
+      #@products_using_this = @technology.product_technologies
+      #@products_not_using_this = Product.where('id not in (?)', @technology.product_technologies.map(&:product_id).join(','))
     else
       @products_using_this = [] # use 'none' in Rails 4
       @products_not_using_this = Product.find(:all)
@@ -25,6 +27,10 @@ class TechnologiesController < ApplicationController
     @commentable = @technology
     @comments = @commentable.comments
     @comment = Comment.new
+
+    @recommendable = @technology
+    @recommends = @recommendable.recommends
+    @recommend = Recommend.new
 
     respond_to do |format|
       format.html # show.html.erb
@@ -86,11 +92,16 @@ class TechnologiesController < ApplicationController
   # DELETE /technologies/1.json
   def destroy
     @technology = Technology.find(params[:id])
-    @technology.destroy
 
     respond_to do |format|
-      format.html { redirect_to technologies_url }
-      format.json { head :no_content }
+      if @technology.destroy
+        format.html { redirect_to technologies_url }
+        format.json { head :no_content }
+      else
+        format.html { redirect_to @technology, notice: 'Technology has product connections or recommendations' }
+        format.json { render json: @technology.errors }
+      end
     end
   end
+
 end
