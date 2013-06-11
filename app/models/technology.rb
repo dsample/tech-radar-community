@@ -6,7 +6,7 @@ class Technology < ActiveRecord::Base
   has_many :recommends, :as => :recommendable
   attr_accessible :category_id, :description, :name, :summary
 
-  before_destroy :confirm_orphan_technology
+  before_destroy :confirm_orphan
 
 	def products_using_this
 		product_technologies
@@ -17,10 +17,9 @@ class Technology < ActiveRecord::Base
 		Product.where('id not in (?)', product_technologies.map(&:product_id).join(','))
 	end
 
-
   protected
 
-  def confirm_orphan_technology
+  def confirm_orphan
   	is_orphan = true
 
     if products.count > 0
