@@ -1,29 +1,36 @@
-<h1>Listing technologies</h1>
+<h1>Technologies</h1>
 
+<div class="button-bar">
+  <ul class="button-group">
+    <li><%= link_to 'Create Technology', new_technology_path, :class => ['small', 'button'] %></li>
+  </ul>
+</div>
+
+<% if @technologies.count > 0 %>
 <table>
-  <tr>
-    <th>Category</th>
-    <th>Name</th>
-    <th>Summary</th>
-    <th>Description</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+  <thead>
+    <tr>
+      <th>Category</th>
+      <th>Name</th>
+      <th>Summary</th>
+      <th></th>
+    </tr>
+  </thead>
 
-<% @technologies.each do |technology| %>
-  <tr>
-    <td><%= technology.category.name %></td>
-    <td><%= technology.name %></td>
-    <td><%= technology.summary %></td>
-    <td><%= technology.description %></td>
-    <td><%= link_to 'Show', technology %></td>
-    <td><%= link_to 'Edit', edit_technology_path(technology) %></td>
-    <td><%= link_to 'Destroy', technology, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
+  <tbody>
+    <% @technologies.each do |technology| %>
+      <tr>
+        <td><%= technology.category.name.singularize.titleize %></td>
+        <td><%= link_to technology.name, technology %></td>
+        <td><%= md technology.summary.to_s %></td>
+        <td>
+          <%= link_to image_tag('pencil.png', alt: 'Edit technology', title: 'Edit technology' ), edit_technology_path(technology), class: 'small secondary button' %>
+          <%= link_to image_tag('delete.png', alt: 'Delete technology', title: 'Delete technology' ), technology, method: :delete, data: { confirm: 'Are you sure?' }, class: 'small secondary button' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
-
-<br />
-
-<%= link_to 'New Technology', new_technology_path %>
+<% else %>
+<p><em>There no products to list</em></p>
+<% end %>

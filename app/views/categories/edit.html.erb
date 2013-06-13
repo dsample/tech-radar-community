@@ -1,6 +1,12 @@
 <h1>Editing category</h1>
 
-<%= render 'form' %>
+<div class="button-bar">
+	<div class="button-group">
+		<%= link_to 'Back to categories', categories_path, class: 'small secondary button' %>
+	</div>
+	<div class="button-group">
+		<%= link_to 'Cancel', @category, class: 'small button' %>
+	</div>
+</div>
 
-<%= link_to 'Show', @category %> |
-<%= link_to 'Back', categories_path %>
+<%= render 'form' %>

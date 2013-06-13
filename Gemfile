@@ -5,6 +5,8 @@ gem 'rails', '3.2.11'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
+gem 'rdiscount'
+
 gem 'sqlite3'
 
 group :development, :test do
@@ -21,6 +23,7 @@ group :assets do
   # gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
+  gem 'zurb-foundation', '~> 4.0.0'
 end
 
 gem 'jquery-rails'

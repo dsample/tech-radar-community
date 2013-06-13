@@ -7,7 +7,9 @@ Techradarcommunity::Application.routes.draw do
     resources :comments
     resources :recommends
   end
+
   resources :categories
+  #resources :recommendations
 
 
   # The priority is based upon order of creation:

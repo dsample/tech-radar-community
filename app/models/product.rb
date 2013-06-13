@@ -11,20 +11,19 @@ class Product < ActiveRecord::Base
   protected
 
 	def confirm_orphan
-	  	is_orphan = true
+  	is_orphan = true
 
-	    if technologies.count > 0
-	    	is_orphan = false
-	    	errors.add(:base, 'The technology has connected technologies, remove them before deleting the product.')
-	    end
+    if technologies.count > 0
+    	is_orphan = false
+    	errors.add(:base, 'The technology has connected technologies, remove them before deleting the product.')
+    end
 
-	    if comments.count > 0
-	    	is_orphan = false
-	    	errors.add(:base, 'The product has connected comments, remove them before deleting the product.' )
-	    end
+    if comments.count > 0
+    	is_orphan = false
+    	errors.add(:base, 'The product has connected comments, remove them before deleting the product.' )
+    end
 
-	    return is_orphan
-	  end
+    return is_orphan
 	end
 
 end

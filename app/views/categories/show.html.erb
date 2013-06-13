@@ -1,22 +1,25 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Name:</b>
-  <%= @category.name %>
-</p>
+<div class="button-bar">
+	<div class="button-group">
+		<%= link_to 'Back', categories_path, class: 'small secondary button' %>
+	</div>
+	<div class="button-group">
+		<%= link_to 'Edit', edit_category_path(@category), class: 'small button' %>
+	</div>
+</div>
 
-<p>
-  <b>Description:</b>
-  <%= @category.description %>
-</p>
+<h2><%= @category.name.pluralize %></h2>
 
-<% if @category.technologies.count  %>
-<ul>
-	<% @category.technologies.each do |tech| %>
-		<li><%= link_to(tech.name, tech) %></li>
-	<% end %>
-</ul>
+<div><%= md @category.description %></div>
+
+<% if @category.technologies.count > 0 %>
+	<h3>Technologies</h3>
+
+	<dl class="no-bullet">
+		<% @category.technologies.each do |tech| %>
+			<dt><%= link_to(tech.name, tech) %></dt>
+			<dd><%= md tech.summary.to_s %></dd>
+		<% end %>
+	</dl>
 <% end %>
-
-<%= link_to 'Edit', edit_category_path(@category) %> |
-<%= link_to 'Back', categories_path %>

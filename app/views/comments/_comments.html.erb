@@ -1,7 +1,12 @@
 <div id="comments">
 <% @comments.each do |comment| %>
-  <div class="comment">
-    <%= simple_format comment.body %>
+  <div class="comment panel">
+  	<div class="comment-details">
+	  	<time datetime="<%= comment.created_at.strftime('%FT%H:%M:S%Z') %>"><%= comment.created_at.strftime('%F %H:%M') %></time>
+  	</div>
+  	<div class="comment-body">
+    	<%= md comment.body %>
+  	</div>
   </div>
 <% end %>
 </div>

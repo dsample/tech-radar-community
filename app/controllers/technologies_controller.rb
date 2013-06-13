@@ -53,7 +53,7 @@ class TechnologiesController < ApplicationController
   # GET /technologies/1/edit
   def edit
     @technology = Technology.find(params[:id])
-    @categories = Categories.find(:all)
+    @categories = Category.find(:all)
   end
 
   # POST /technologies

@@ -1,6 +1,12 @@
 <h1>Editing technology</h1>
 
-<%= render 'form' %>
+<div class="button-bar">
+	<div class="button-group">
+		<%= link_to 'Back to technologies', technologies_path, class: 'small secondary button' %>
+	</div>
+	<div class="button-group">
+		<%= link_to 'Cancel', @technology, class: 'small button' %>
+	</div>
+</div>
 
-<%= link_to 'Show', @technology %> |
-<%= link_to 'Back', technologies_path %>
+<%= render 'form' %>

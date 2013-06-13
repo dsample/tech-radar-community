@@ -1,25 +1,34 @@
 <%= form_for [@recommendable, @recommend] do |f| %>
-  <% if @recommend.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@recommend.errors.count, "error") %> prohibited this recommend from being saved:</h2>
+  <fieldset>
+    <legend>Recommendation</legend>
+    <% if @recommend.errors.any? %>
+      <div data-alert class="alert-box alert">
+        <ul>
+        <% @recommend.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
 
-      <ul>
-      <% @recommend.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+        <a href="#" class="close">&times;</a>
+      </div>
+    <% end %>
+
+    <div class="row">
+      <div class="large-12 columns">
+        <%= f.label :recommendation %>
+        <%= f.select :recommendation_id, options_for_select(Recommendation.find(:all).map{|x| [x.name.titleize, x.id] }) %>
+      </div>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :recommendation %><br />
-    <%= f.select :recommendation_id, options_for_select(Recommendation.find(:all).map{|x| [x.name.titleize, x.id] }) %>
-  </div>
-  <div class="field">
-    <%= f.label :context %><br />
-    <%= f.text_area :context %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="row">
+      <div class="large-12 columns">
+        <%= f.label :context %>
+        <%= f.text_area :context %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="large-12 columns">
+        <%= f.submit class: 'button' %>
+      </div>
+    </div>
+  </fieldset>
 <% end %>

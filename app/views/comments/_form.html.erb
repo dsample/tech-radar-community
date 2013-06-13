@@ -1,20 +1,40 @@
 <%= form_for [@commentable, @comment] do |f| %>
-  <% if @comment.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
 
-      <ul>
-      <% @comment.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+    <div class="row">
+      <div class="large-12">
+      </div>
     </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.text_area :body, rows: 8 %>
+  <div class="row">
+    <div class="large-12 columns">
+      <fieldset>
+        <legend>Comment</legend>
+
+        <% if @comment.errors.any? %>
+          <div data-alert class="alert-box alert">
+            <ul>
+            <% @comment.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+            </ul>
+
+            <a href="#" class="close">&times;</a>
+          </div>
+        <% end %>
+
+        <div class="row">
+          <div class="large-12 columns">
+            <%= f.label :body %>
+            <%= f.text_area :body, rows: 8 %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="large-12 columns">
+            <%= f.submit class: 'button' %>
+          </div>
+        </div>
+      </fieldset>
+    </div>
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+
 <% end %>

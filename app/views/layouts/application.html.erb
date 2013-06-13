@@ -1,20 +1,54 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>Techradarcommunity</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7 ]> <html class="ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
+  <head>
+  	<meta charset="utf-8" />
 
-	<nav>
-		<%= link_to "Technologies", technologies_path %> |
-		<%= link_to "Products", products_path %> |
-		<%= link_to "Categories", categories_path %>
-	</nav>
+  	<!-- Uncomment to make IE8 render like IE7 -->
+  	<!-- <meta http-equiv="X-UA-Compatible" content="IE=7" /> -->
 
-<%= yield %>
+  	<!-- Set the viewport width to device width for mobile -->
+  	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-</body>
+  	<title><%= content_for?(:title) ? yield(:title) : "Tech Radar" %></title>
+
+  	<%= stylesheet_link_tag    "application" %>
+  	<%= javascript_include_tag "vendor/custom.modernizr" %>
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body>
+
+    <%= render :partial => "nav" %>
+
+    <div class="row">
+      <div class="large-12">
+        <%= yield %>
+      </div>
+    </div>
+
+    <div id="markdownHelp" class="reveal-modal">
+      <h2>Markdown</h2>
+
+      <p>In depth documentation of Markdown is available over on <a href="http://daringfireball.net/projects/markdown/basics">Daring Fireball</a></p>
+
+      <hr />
+
+      <p>CODE BLOCKS</p>
+
+      <p>To produce a code block in Markdown, simply indent every line of the block by at least 4 spaces or 1 tab. For example, given this input:</p>
+
+<pre>
+This is a normal paragraph:
+
+    This is a code block.
+</pre>
+      <a class="close-reveal-modal">&#215;</a>
+    </div>
+
+    <%= javascript_include_tag "application" %>
+  </body>
 </html>

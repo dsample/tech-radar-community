@@ -1,7 +1,13 @@
-<div id="recommends">
+<div id="recommendations">
 <% @recommends.each do |recommendation| %>
-  <div class="recommend">
-    <%= simple_format recommendation.context %>
+  <div class="recommendation panel">
+  	<div class="recommendation-details">
+  		<div class="recommendation-type"><%= recommendation.recommendation.name.titleize %></div>
+	  	<time class="right" datetime="<%= recommendation.created_at.strftime('%FT%H:%M:S%Z') %>"><%= recommendation.created_at.strftime('%F %H:%M') %></time>
+  	</div>
+  	<div class="recommendation-context">
+    	<%= md recommendation.context %>
+  	</div>
   </div>
 <% end %>
 </div>

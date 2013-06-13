@@ -1,25 +1,32 @@
-<h1>Listing categories</h1>
+<h1>Technology categories</h1>
+
+<div class="button-bar">
+  <ul class="button-group">
+    <li><%= link_to 'Create Category', new_category_path, :class => ['small', 'button'] %></li>
+  </ul>
+</div>
+
+<!--
+<p class="info">Technology categories are the 'segments of the radar'. Usually four is enough, but more/less can also be used.</p>
+-->
 
 <table>
-  <tr>
-    <th>Name</th>
-    <th>Description</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th></th>
+    </tr>
+  </thead>
 
-<% @categories.each do |category| %>
-  <tr>
-    <td><%= category.name %></td>
-    <td><%= category.description %></td>
-    <td><%= link_to 'Show', category %></td>
-    <td><%= link_to 'Edit', edit_category_path(category) %></td>
-    <td><%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
+  <tbody>
+    <% @categories.each do |category| %>
+      <tr>
+        <td><%= link_to category.name.pluralize, category %></td>
+        <td>
+          <%= link_to image_tag('pencil.png', alt: 'Edit category', title: 'Edit category' ), edit_category_path(category), class: 'small secondary button' %>
+          <%= link_to image_tag('delete.png', alt: 'Delete category', title: 'Delete category' ), category, method: :delete, data: { confirm: 'Are you sure?' }, class: 'small secondary button' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
-
-<br />
-
-<%= link_to 'New Category', new_category_path %>

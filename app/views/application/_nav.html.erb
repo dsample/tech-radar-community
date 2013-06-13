@@ -1,0 +1,42 @@
+<nav class="top-bar">
+  <ul class="title-area">
+    <!-- Title Area -->
+    <li class="name">
+      <h1><%= link_to (content_for?(:title) ? yield(:title) : "Tech Radar"), root_path %></h1>
+    </li>
+    <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+  </ul>
+
+  <section class="top-bar-section">
+    <!-- Left Nav Section -->
+    <ul class="left">
+      <li class="divider"></li>
+      <% ['technologies', 'products'].each do |item| %>
+        <li <%=params['controller'].parameterize == item.parameterize ? 'class=active' : '' %>>
+          <%= link_to item.titleize, {:controller => item} %>
+        </li>
+        <li class="divider"></li>
+      <% end %>
+    </ul>
+
+    <!-- Right Nav Section -->
+    <ul class="right">
+      <li class="divider hide-for-small"></li>
+      <li class="has-dropdown"><a href="#">Admin</a>
+
+        <ul class="dropdown">
+          <li><label>Configuration</label></li>
+          <% [ 
+            { name: 'Technology categories', controller: 'categories' }, 
+            { name: 'Recommendation levels', controller: 'categories' }, 
+            { name: 'Product implementation states', controller: 'categories' } ].each do |item| %>
+            <li <%=params['controller'].parameterize == item[:controller].to_s.parameterize ? 'class=active' : '' %>>
+              <%= link_to item[:name].to_s.titleize, {:controller => item[:controller].to_s} %>
+            </li>
+          <% end %>
+        </ul>
+      </li>
+    </ul>
+  </section>
+</nav>
