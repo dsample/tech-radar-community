@@ -13,13 +13,15 @@
 
 <div><%= md @category.description %></div>
 
-<% if @category.technologies.count > 0 %>
-	<h3>Technologies</h3>
+<h3>Technologies</h3>
 
+<% if @category.technologies.count > 0 %>
 	<dl class="no-bullet">
 		<% @category.technologies.each do |tech| %>
 			<dt><%= link_to(tech.name, tech) %></dt>
 			<dd><%= md tech.summary.to_s %></dd>
 		<% end %>
 	</dl>
+<% else %>
+	<p><em class="noitems">There are currently no items in this category</em></p>
 <% end %>
