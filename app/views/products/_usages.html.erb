@@ -1,0 +1,18 @@
+<% if @product.product_technologies.count > 0 %>
+	<div id="activity">
+	<% @product.product_technologies.each do |usage| %>
+
+	  <div class="row">
+	  	<div class="large-2 columns">
+		  	<time datetime="<%= usage.created_at.strftime('%FT%H:%M:S%Z') %>"><%= usage.created_at.strftime('%F %H:%M') %></time>
+	  	</div>
+	  	<div class="large-2 columns">
+	    	<%= usage.state.name %>
+	  	</div>
+	  	<div class="large-8 columns">
+	    	<%= usage.technology.name %>
+	  	</div>
+	  </div>
+	<% end %>
+	</div>
+<% end %>

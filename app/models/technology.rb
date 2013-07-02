@@ -9,7 +9,7 @@ class Technology < ActiveRecord::Base
   before_destroy :confirm_orphan
 
 	def products_using_this
-		product_technologies
+    product_technologies.select("product_id, max(date(created_at)), state_id ").group("product_id")
 	end
 
 	def products_not_using_this

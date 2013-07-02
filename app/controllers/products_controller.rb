@@ -13,11 +13,16 @@ class ProductsController < ApplicationController
   # GET /products/1
   # GET /products/1.json
   def show
-    @product = Product.find(params[:id])
+    @product = Product.find(params[:id], :include => :product_technologies)
+    @product_technology = ProductTechnology.new product_id: @product.id #@product.product_technologies.new
 
     @commentable = @product
     @comments = @commentable.comments
     @comment = Comment.new
+
+    @technologies = Technology.all # @product.unused_technologies
+
+    @states = State.all
 
     respond_to do |format|
       format.html # show.html.erb

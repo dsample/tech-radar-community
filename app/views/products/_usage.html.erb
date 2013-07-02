@@ -1,0 +1,36 @@
+<%= form_for(@product_technology, :html => {:class => "custom"}) do |f| %>
+
+  <%= f.hidden_field :product_id %>
+
+  <fieldset>
+    <legend>New technology usage</legend>
+
+    <% if @product_technology.errors.any? %>
+      <div data-alert class="alert-box alert">
+        <ul>
+        <% @product_technology.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+
+        <a href="#" class="close">&times;</a>
+      </div>
+    <% end %>
+
+    <div class="row">
+      <div class="large-6 columns">
+        <%= f.label :technology_id %>
+        <%= f.select :technology_id, options_for_select(@technologies.map{|x| [x.name.titleize, x.id] }), class: ['medium', 'custom','dropdown'] %>
+      </div>
+      <div class="large-5 columns">
+        <%= f.label :state_id %>
+        <%= f.select :state_id, options_for_select(@states.map{|x| [x.name.titleize, x.id] }), class: ['small', 'custom','dropdown'] %>
+      </div>
+      <div class="large-1 columns">
+        <br />
+        <%= f.submit "Add", class: 'small expand button' %>
+      </div>
+    </div>
+
+  </fieldset>
+<% end %>
