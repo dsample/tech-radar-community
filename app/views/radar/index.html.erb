@@ -1,0 +1,11 @@
+<h1>Tech Radar</h1>
+
+<% @categories.each do |category| %>
+	<h2 class="subheader"><%=category.name%></h2>
+
+	<ul class="no-bullet">
+	<% category.technologies.each do |tech| %>
+		<li><%=link_to tech.name, tech %></li>
+	<% end %>
+	</ul>
+<% end %>
