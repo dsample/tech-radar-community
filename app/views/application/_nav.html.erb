@@ -28,8 +28,8 @@
         <ul class="dropdown">
           <li><label>Configuration</label></li>
           <% [ 
-            { name: 'Recommendation levels', controller: 'categories' }, 
-            { name: 'Product implementation states', controller: 'categories' } ].each do |item| %>
+            { name: 'Recommendation types', controller: 'recommendations' }, 
+            { name: 'Product implementation states', controller: 'recommendations' } ].each do |item| %>
             <li <%=params['controller'].parameterize == item[:controller].to_s.parameterize ? 'class=active' : '' %>>
               <%= link_to item[:name].to_s.titleize, {:controller => item[:controller].to_s} %>
             </li>

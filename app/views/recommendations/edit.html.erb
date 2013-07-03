@@ -1,0 +1,12 @@
+<h1>Editing recommendation</h1>
+
+<div class="button-bar">
+	<div class="button-group">
+		<%= link_to 'Back to recommendations', recommendations_path, class: 'small secondary button' %>
+	</div>
+	<div class="button-group">
+		<%= link_to 'Cancel', @recommendation, class: 'small button' %>
+	</div>
+</div>
+
+<%= render 'form' %>

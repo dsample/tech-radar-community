@@ -1,0 +1,12 @@
+<div class="button-bar">
+	<div class="button-group">
+		<%= link_to 'Back', recommendations_path, class: 'small secondary button' %>
+	</div>
+	<div class="button-group">
+		<%= link_to 'Edit', edit_recommendation_path(@recommendation), class: 'small button' %>
+	</div>
+</div>
+
+<h2><%= @recommendation.name %></h2>
+
+<div><%= md @recommendation.description %></div>

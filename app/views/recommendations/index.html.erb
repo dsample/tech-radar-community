@@ -1,0 +1,32 @@
+<h1>Recommendation types</h1>
+
+<div class="button-bar">
+  <ul class="button-group">
+    <li><%= link_to 'Create Recommendation', new_recommendation_path, :class => ['small', 'button'] %></li>
+  </ul>
+</div>
+
+<% if @recommendations.count > 0 %>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @recommendations.each do |recommendation| %>
+        <tr>
+          <td><%= link_to recommendation.name, recommendation %></td>
+          <td>
+            <%= link_to image_tag('pencil.png', alt: 'Edit recommendation', title: 'Edit recommendation' ), edit_recommendation_path(recommendation), class: 'small secondary inline button' %>
+            <%= link_to image_tag('delete.png', alt: 'Delete recommendation', title: 'Delete recommendation' ), recommendation, method: :delete, data: { confirm: 'Are you sure?' }, class: 'small secondary inline button' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p class="secondary alert-box">There are no recommendation types yet&hellip; <%= link_to 'create one', new_recommendation_path %>.</p>
+<% end %>

@@ -1,0 +1,36 @@
+<%= form_for(@recommendation, :html => {:class => "custom"}) do |f| %>
+  <fieldset>
+    <legend>Recommendation</legend>
+    <% if @recommendation.errors.any? %>
+      <div data-alert class="alert-box alert">
+        <ul>
+        <% @recommendation.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+
+        <a href="#" class="close">&times;</a>
+      </div>
+    <% end %>
+
+
+    <div class="row">
+      <div class="large-12 columns">
+        <%= f.label :name %>
+        <%= f.text_field :name %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="large-12 columns">
+        <%= f.label :description %>
+        <small><a href="#" data-reveal-id="markdownHelp">(Markdown formatted)</a></small>
+        <%= f.text_area :description, :rows => 8 %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="large-12 columns">
+        <%= f.submit class: 'button' %>
+      </div>
+    </div>
+  </fieldset>
+<% end %>
