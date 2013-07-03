@@ -24,8 +24,8 @@
         <td><%= link_to technology.name, technology %></td>
         <td><%= md technology.summary.to_s %></td>
         <td>
-          <%= link_to image_tag('pencil.png', alt: 'Edit technology', title: 'Edit technology' ), edit_technology_path(technology), class: 'small secondary button' %>
-          <%= link_to image_tag('delete.png', alt: 'Delete technology', title: 'Delete technology' ), technology, method: :delete, data: { confirm: 'Are you sure?' }, class: 'small secondary button' %>
+          <%= link_to image_tag('pencil.png', alt: 'Edit technology', title: 'Edit technology' ), edit_technology_path(technology), class: 'small secondary inline button' %>
+          <%= link_to image_tag('delete.png', alt: 'Delete technology', title: 'Delete technology' ), technology, method: :delete, data: { confirm: 'Are you sure?' }, class: 'small secondary inline button' %>
         </td>
       </tr>
     <% end %>

@@ -23,8 +23,8 @@
       <tr>
         <td><%= link_to category.name.pluralize, category %></td>
         <td>
-          <%= link_to image_tag('pencil.png', alt: 'Edit category', title: 'Edit category' ), edit_category_path(category), class: 'small secondary button' %>
-          <%= link_to image_tag('delete.png', alt: 'Delete category', title: 'Delete category' ), category, method: :delete, data: { confirm: 'Are you sure?' }, class: 'small secondary button' %>
+          <%= link_to image_tag('pencil.png', alt: 'Edit category', title: 'Edit category' ), edit_category_path(category), class: 'small secondary inline button' %>
+          <%= link_to image_tag('delete.png', alt: 'Delete category', title: 'Delete category' ), category, method: :delete, data: { confirm: 'Are you sure?' }, class: 'small secondary inline button' %>
         </td>
       </tr>
     <% end %>
