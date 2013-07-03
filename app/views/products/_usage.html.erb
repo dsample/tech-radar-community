@@ -1,6 +1,6 @@
-<%= form_for(@product_technology, :html => {:class => "custom"}) do |f| %>
+<%= form_for([@product, @product_technology], :html => {:class => "custom"}) do |f| %>
 
-  <%= f.hidden_field :product_id %>
+  <%#= f.hidden_field :product_id %>
 
   <fieldset>
     <legend>New technology usage</legend>

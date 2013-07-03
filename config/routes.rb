@@ -4,6 +4,7 @@ Techradarcommunity::Application.routes.draw do
 
   resources :products do
     resources :comments
+    resources :product_technologies, path: 'usage', only: [:create] #, as: 'usage'
   end
   resources :technologies do
     resources :comments

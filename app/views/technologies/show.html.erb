@@ -45,12 +45,12 @@
 	</div>
 
 	<div class="large-4 columns">
-		<% if @products_using_this.count > 0 %>
+		<% if !@products_using_this.empty? && @products_using_this.count.count > 0 %>
 			<div class="panel">
 				<h5>Products using this</h5>
 				<ul class="no-bullet">
 					<% @products_using_this.each do |pt| %>
-						<li><%= link_to pt.product.name, pt.product %> <em>(<%= pt.states.last.name %>)</em></li>
+						<li><%= link_to pt.product.name, pt.product %> <em>(<%= pt.state.name %>)</em></li>
 					<% end %>
 				</ul>
 			</div>

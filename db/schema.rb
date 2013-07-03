@@ -33,22 +33,14 @@ ActiveRecord::Schema.define(:version => 20130610214411) do
   create_table "product_technologies", :force => true do |t|
     t.integer  "product_id"
     t.integer  "technology_id"
+    t.integer  "state_id"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
   end
 
   add_index "product_technologies", ["product_id"], :name => "index_product_technologies_on_product_id"
+  add_index "product_technologies", ["state_id"], :name => "index_product_technologies_on_state_id"
   add_index "product_technologies", ["technology_id"], :name => "index_product_technologies_on_technology_id"
-
-  create_table "product_technology_states", :force => true do |t|
-    t.integer  "product_technology_id"
-    t.integer  "state_id"
-    t.datetime "created_at",            :null => false
-    t.datetime "updated_at",            :null => false
-  end
-
-  add_index "product_technology_states", ["product_technology_id"], :name => "index_product_technology_states_on_product_technology_id"
-  add_index "product_technology_states", ["state_id"], :name => "index_product_technology_states_on_state_id"
 
   create_table "products", :force => true do |t|
     t.string   "name"
