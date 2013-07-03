@@ -13,7 +13,7 @@ Techradarcommunity::Application.routes.draw do
   resources :product_technologies
 
   resources :categories
-  #resources :recommendations
+  resources :recommendations
 
 
   # The priority is based upon order of creation:

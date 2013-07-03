@@ -46,10 +46,11 @@ class ProductTechnologiesController < ApplicationController
     respond_to do |format|
       if @product_technology.save
         format.html { 
+          flash[:success] = 'Product technology was successfully created.'
           if params[:product_id]
-            redirect_to Product.find(params[:product_id]), notice: 'Product technology was successfully created.'
+            redirect_to Product.find(params[:product_id])
           else
-            redirect_to @product_technology, notice: 'Product technology was successfully created.' 
+            redirect_to @product_technology 
           end
         }
         format.json { render json: @product_technology, status: :created, location: @product_technology }
