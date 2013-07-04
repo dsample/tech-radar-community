@@ -14,6 +14,7 @@ Techradarcommunity::Application.routes.draw do
 
   resources :categories
   resources :recommendations
+  resources :states
 
 
   # The priority is based upon order of creation:
