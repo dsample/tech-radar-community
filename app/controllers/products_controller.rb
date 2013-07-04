@@ -87,8 +87,14 @@ class ProductsController < ApplicationController
     @product.destroy
 
     respond_to do |format|
-      format.html { redirect_to products_url }
-      format.json { head :no_content }
+      if @product.destroy
+        format.html { redirect_to products_url }
+        format.json { head :no_content }
+      else
+        flash[:error] = 'Product has connections or recommendations. Remove these before deletion'
+        format.html { redirect_to @product }
+        format.json { render json: @product.errors }
+      end
     end
   end
 end

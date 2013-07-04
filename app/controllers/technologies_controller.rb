@@ -63,7 +63,8 @@ class TechnologiesController < ApplicationController
 
     respond_to do |format|
       if @technology.save
-        format.html { redirect_to @technology, notice: 'Technology was successfully created.' }
+        flash[:success] = 'Technology was successfully created.'
+        format.html { redirect_to @technology }
         format.json { render json: @technology, status: :created, location: @technology }
       else
         format.html { render action: "new" }
@@ -79,7 +80,8 @@ class TechnologiesController < ApplicationController
 
     respond_to do |format|
       if @technology.update_attributes(params[:technology])
-        format.html { redirect_to @technology, notice: 'Technology was successfully updated.' }
+        flash[:success] = 'Technology was successfully updated.'
+        format.html { redirect_to @technology }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -98,7 +100,8 @@ class TechnologiesController < ApplicationController
         format.html { redirect_to technologies_url }
         format.json { head :no_content }
       else
-        format.html { redirect_to @technology, notice: 'Technology has product connections or recommendations' }
+        flash[:error] = 'Technology has product connections or recommendations'
+        format.html { redirect_to @technology }
         format.json { render json: @technology.errors }
       end
     end

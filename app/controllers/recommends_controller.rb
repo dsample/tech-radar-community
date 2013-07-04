@@ -30,7 +30,8 @@ class RecommendsController < ApplicationController
 
     respond_to do |format|
       if @recommend.save
-        format.html { redirect_to @recommendable, notice: 'Recommendation created.' }
+        flash[:success] = 'Recommendation created.'
+        format.html { redirect_to @recommendable }
         format.json { render json: @recommend, status: :created, location: @recommend }
       else
         format.html { render action: "new" }

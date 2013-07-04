@@ -1,7 +1,7 @@
 <h1>Tech Radar</h1>
 
 <% @categories.each do |category| %>
-	<h2 class="subheader"><%=category.name%></h2>
+	<h2 class="subheader"><%=category.name.pluralize%></h2>
 
 	<ul class="no-bullet">
 	<% category.technologies.each do |tech| %>
