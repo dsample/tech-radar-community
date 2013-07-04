@@ -84,10 +84,12 @@ class ProductsController < ApplicationController
   # DELETE /products/1.json
   def destroy
     @product = Product.find(params[:id])
+    product_name = @product.name
     @product.destroy
 
     respond_to do |format|
       if @product.destroy
+        flash[:error] = "#{product_name} deleted"
         format.html { redirect_to products_url }
         format.json { head :no_content }
       else

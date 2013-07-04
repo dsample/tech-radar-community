@@ -13,8 +13,8 @@ class Technology < ActiveRecord::Base
 	end
 
 	def products_not_using_this
-		return Product.find(:all) if product_technologies.count == 0
-		Product.where('id not in (?)', product_technologies.map(&:product_id).join(','))
+		#return Product.find(:all) if product_technologies.count == 0
+		Product.where('id not in (?)', product_technologies.map(&:product_id))
 	end
 
   def orphan?

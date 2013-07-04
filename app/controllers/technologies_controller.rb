@@ -109,6 +109,7 @@ class TechnologiesController < ApplicationController
   # DELETE /technologies/1.json
   def destroy
     @technology = Technology.find(params[:id])
+    technology_name = @technology.name
 
     if @technology.active?
       @technology.deleted_at = DateTime.now
@@ -121,7 +122,7 @@ class TechnologiesController < ApplicationController
           success = @technology.save
         end
         if success
-          flash[:notice] = 'Technology deleted successfully'
+          flash[:notice] = "#{technology_name} deleted"
           format.html { redirect_to technologies_url }
           format.json { head :no_content }
         else
