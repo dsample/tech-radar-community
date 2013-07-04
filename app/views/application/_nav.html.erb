@@ -29,7 +29,7 @@
           <li><label>Configuration</label></li>
           <% [ 
             { name: 'Recommendation types', controller: 'recommendations' }, 
-            { name: 'Product implementation states', controller: 'recommendations' } ].each do |item| %>
+            { name: 'Product implementation states', controller: 'states' } ].each do |item| %>
             <li <%=params['controller'].parameterize == item[:controller].to_s.parameterize ? 'class=active' : '' %>>
               <%= link_to item[:name].to_s.titleize, {:controller => item[:controller].to_s} %>
             </li>

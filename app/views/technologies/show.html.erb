@@ -2,13 +2,19 @@
 	<div class="button-group">
 		<%= link_to 'Back', technologies_path, class: 'small secondary button' %>
 	</div>
+	<% if @technology.active? %>
 	<div class="button-group">
 		<%= link_to 'Edit', edit_technology_path(@technology), class: 'small button' %>
 		<%= link_to 'Delete', @technology, method: :delete, data: { confirm: 'Are you sure?' }, class: 'small alert button' %>
 	</div>
+	<% end %>
 </div>
 
 <h2 class="subheader"><%= @technology.category.name.singularize %></h2>
+
+<% if @technology.deleted? %>
+	<p class="alert-box">This technology has been deleted so it's readonly.</p>
+<% end %>
 
 <div class="row">
 	<div class="large-8 columns">
@@ -33,12 +39,12 @@
 		<h4 class="subheader">Recommendations</h4>
 
 		<%= render :partial => 'recommends/recommends' %>
-		<%= render :partial => 'recommends/form' %>
+		<%= render :partial => 'recommends/form' unless @technology.deleted? %>
 
 		<h4 class="subheader">Comments</h4>
 
 		<%= render :partial => 'comments/comments' %>
-		<%= render :partial => 'comments/form' %>
+		<%= render :partial => 'comments/form' unless @technology.deleted? %>
 
 	</div>
 
@@ -54,7 +60,7 @@
 			</div>
 		<% end %>
 
-		<% if @products_not_using_this.count > 0 %>
+		<% if @products_not_using_this.count > 0 && @technology.active? %>
 		<div class="panel">
 			<h5>Products not using this yet</h5>
 				<ul class="no-bullet">

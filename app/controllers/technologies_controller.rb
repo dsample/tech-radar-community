@@ -2,7 +2,7 @@ class TechnologiesController < ApplicationController
   # GET /technologies
   # GET /technologies.json
   def index
-    @technologies = Technology.all
+    @technologies = Technology.all(:conditions => 'deleted_at IS NULL')
 
     respond_to do |format|
       format.html # index.html.erb
@@ -54,6 +54,14 @@ class TechnologiesController < ApplicationController
   def edit
     @technology = Technology.find(params[:id])
     @categories = Category.find(:all)
+
+    if @technology.deleted?
+      respond_to do |format|
+        flash[:error] = 'Technology is marked as deleted, so cannot be modified'
+        format.html { redirect_to @technology }
+        format.json { render nothing: true, status: :method_not_allowed }
+      end
+    end
   end
 
   # POST /technologies
@@ -79,13 +87,20 @@ class TechnologiesController < ApplicationController
     @technology = Technology.find(params[:id])
 
     respond_to do |format|
-      if @technology.update_attributes(params[:technology])
-        flash[:success] = 'Technology was successfully updated.'
-        format.html { redirect_to @technology }
-        format.json { head :no_content }
+
+      if @technology.active?
+        if @technology.update_attributes(params[:technology])
+          flash[:success] = 'Technology was successfully updated.'
+          format.html { redirect_to @technology }
+          format.json { head :no_content }
+        else
+          format.html { render action: "edit" }
+          format.json { render json: @technology.errors, status: :unprocessable_entity }
+        end
       else
-        format.html { render action: "edit" }
-        format.json { render json: @technology.errors, status: :unprocessable_entity }
+        flash[:error] = 'Technology is marked as deleted, so cannot be modified'
+        format.html { redirect_to @technology }
+        format.json { render json: @technology.errors, status: :method_not_allowed }
       end
     end
   end
@@ -95,14 +110,31 @@ class TechnologiesController < ApplicationController
   def destroy
     @technology = Technology.find(params[:id])
 
-    respond_to do |format|
-      if @technology.destroy
-        format.html { redirect_to technologies_url }
-        format.json { head :no_content }
-      else
-        flash[:error] = 'Technology has product connections or recommendations'
+    if @technology.active?
+      @technology.deleted_at = DateTime.now
+
+      respond_to do |format|
+        #if @technology.destroy
+        if (@technology.orphan?)
+          success = @technology.destroy
+        else
+          success = @technology.save
+        end
+        if success
+          flash[:notice] = 'Technology deleted successfully'
+          format.html { redirect_to technologies_url }
+          format.json { head :no_content }
+        else
+          flash[:error] = 'Technology has product connections or recommendations'
+          format.html { redirect_to @technology }
+          format.json { render json: @technology.errors }
+        end
+      end
+    else
+      respond_to do |format|
+        flash[:error] = 'Technology has already been marked as deleted'
         format.html { redirect_to @technology }
-        format.json { render json: @technology.errors }
+        format.json { render json: @technology.errors, status: :method_not_allowed }
       end
     end
   end

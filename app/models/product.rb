@@ -1,13 +1,13 @@
 class Product < ActiveRecord::Base
-  has_many :product_technologies
+  has_many :product_technologies, :dependent => :delete_all
   has_many :technologies, :through => :product_technologies
   has_many :states, :through => :product_technologies
-  has_many :comments, :as => :commentable
+  has_many :comments, :as => :commentable, :dependent => :delete_all
   attr_accessible :name
   
   validates :name, :presence => true
 
-  before_destroy :confirm_orphan
+  #before_destroy :confirm_orphan
 
   def used_technologies
     product_technologies.select("technology_id, max(date(created_at)), state_id ").group("technology_id")
