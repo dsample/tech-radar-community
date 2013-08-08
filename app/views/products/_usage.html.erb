@@ -20,11 +20,11 @@
     <div class="row">
       <div class="large-6 columns">
         <%= f.label :technology_id %>
-        <%= f.select :technology_id, options_for_select(@technologies.map{|x| [x.name.titleize, x.id] }), class: ['medium', 'custom','dropdown'] %>
+        <%= f.select :technology_id, options_for_select(@technologies.map{|x| [x.name, x.id] }), class: ['medium', 'custom', 'dropdown'] %>
       </div>
       <div class="large-5 columns">
         <%= f.label :state_id %>
-        <%= f.select :state_id, options_for_select(@states.map{|x| [x.name.titleize, x.id] }), class: ['small', 'custom','dropdown'] %>
+        <%= f.select :state_id, options_for_select(@states.map{|x| [x.name.titleize, x.id] }), class: ['small', 'custom', 'dropdown'] %>
       </div>
       <div class="large-1 columns">
         <br />

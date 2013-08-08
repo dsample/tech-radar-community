@@ -36,24 +36,7 @@
       </div>
     </div>
 
-    <div id="markdownHelp" class="reveal-modal">
-      <h2>Markdown</h2>
-
-      <p>In depth documentation of Markdown is available over on <a href="http://daringfireball.net/projects/markdown/basics">Daring Fireball</a></p>
-
-      <hr />
-
-      <p>CODE BLOCKS</p>
-
-      <p>To produce a code block in Markdown, simply indent every line of the block by at least 4 spaces or 1 tab. For example, given this input:</p>
-
-<pre>
-This is a normal paragraph:
-
-    This is a code block.
-</pre>
-      <a class="close-reveal-modal">&#215;</a>
-    </div>
+    <%= render :partial => 'markdown' %>
 
     <%= javascript_include_tag "application" %>
   </body>

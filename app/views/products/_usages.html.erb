@@ -1,16 +1,16 @@
 <% if @product.product_technologies.count > 0 %>
-	<div id="activity">
+	<div class="striped bordered table large-12 columns">
 	<% @product.product_technologies.each do |usage| %>
 
 	  <div class="row">
-	  	<div class="large-3 columns">
-		  	<time datetime="<%= usage.created_at.strftime('%FT%H:%M:S%Z') %>"><%= usage.created_at.strftime('%F %H:%M') %></time>
+	  	<div class="large-6 columns">
+	    	<%= link_to usage.technology.name, usage.technology %>
 	  	</div>
 	  	<div class="large-3 columns">
 	    	<%= usage.state.name %>
 	  	</div>
-	  	<div class="large-6 columns">
-	    	<%= link_to usage.technology.name, usage.technology %>
+	  	<div class="large-3 columns">
+		  	<time datetime="<%= usage.created_at.strftime('%FT%H:%M:S%Z') %>"><%= usage.created_at.strftime('%F %H:%M') %></time>
 	  	</div>
 	  </div>
 	<% end %>

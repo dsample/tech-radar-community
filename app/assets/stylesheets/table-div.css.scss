@@ -1,0 +1,16 @@
+/*.striped.table .row:nth-child(odd) {}*/
+.table {
+	margin-bottom: 1em;
+}
+.table .row {
+	padding: 10px 0px;
+}
+.striped.table .row:nth-child(even) {
+	background-color: #f9f9f9;
+}
+.striped.table .row:hover {
+	background-color: #f0f0f0;
+}
+.bordered.table {
+	border: thin #f0f0f0 solid;
+}
