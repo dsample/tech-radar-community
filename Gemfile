@@ -6,6 +6,7 @@ gem 'rails', '3.2.11'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'rdiscount'
+gem 'mingle4r'
 
 gem 'sqlite3'
 
@@ -35,8 +36,8 @@ gem 'jquery-rails'
 # gem 'jbuilder'
 
 # Use unicorn as the app server
-gem 'unicorn'
-#gem 'thin'
+#gem 'unicorn'
+gem 'thin'
 #gem 'puma'
 
 # Deploy with Capistrano
