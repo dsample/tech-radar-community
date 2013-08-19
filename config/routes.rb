@@ -16,6 +16,10 @@ Techradarcommunity::Application.routes.draw do
   resources :recommendations
   resources :states
 
+  match "/auth/:provider/callback" => "sessions#create", :as => :auth
+  match "/signout" => "sessions#destroy", :as => :signout
+  match "/login" => "sessions#login", :as => :login
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

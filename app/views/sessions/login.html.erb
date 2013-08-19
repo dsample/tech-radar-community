@@ -1,0 +1,21 @@
+<p>Log in using one of the following services</p>
+
+<% unless Rails.env.production? %>
+  <div class="row">
+    <div class="large-12 columns">
+      <a href="/auth/developer" class="button alert expand">Developer login</a>
+    </div>
+  </div>
+<% end %>
+
+<div class="row">
+  <div class="large-4 columns">
+    <a href="/auth/google" class="button expand">Google</a>
+  </div>
+  <div class="large-4 columns">
+    <a href="/auth/twitter" class="button expand">Twitter</a>
+  </div>
+  <div class="large-4 columns">
+    <a href="/auth/linkedin" class="button expand">LinkedIn</a>
+  </div>
+</div>

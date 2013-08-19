@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130704221237) do
+ActiveRecord::Schema.define(:version => 20130819223610) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -29,6 +29,28 @@ ActiveRecord::Schema.define(:version => 20130704221237) do
   end
 
   add_index "comments", ["commentable_id"], :name => "index_comments_on_commentable_id"
+
+  create_table "identities", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "username"
+    t.string   "access_token"
+    t.string   "token_secret"
+    t.string   "refresh_token"
+    t.boolean  "expires"
+    t.string   "expires_at_string"
+    t.datetime "expires_at"
+    t.string   "name"
+    t.string   "avatar_url"
+    t.string   "profile_url"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  add_index "identities", ["access_token"], :name => "index_identities_on_access_token"
+  add_index "identities", ["refresh_token"], :name => "index_identities_on_refresh_token"
+  add_index "identities", ["user_id"], :name => "index_identities_on_user_id"
 
   create_table "product_technologies", :force => true do |t|
     t.integer  "product_id"
@@ -84,5 +106,12 @@ ActiveRecord::Schema.define(:version => 20130704221237) do
   end
 
   add_index "technologies", ["category_id"], :name => "index_technologies_on_category_id"
+
+  create_table "users", :force => true do |t|
+    t.string   "username",     :default => "", :null => false
+    t.string   "display_name", :default => "", :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+  end
 
 end
