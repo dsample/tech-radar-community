@@ -1,9 +1,8 @@
 class SessionsController < ApplicationController
-	protect_from_forgery :except => [:callback]
+	protect_from_forgery :except => [:create]
 
 	def login
-		user = current_user
-		redirect_to root_url if current_user
+		redirect_to root_url if logged_in?
 	end
 
   def create

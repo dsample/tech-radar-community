@@ -2,7 +2,7 @@
 	<div class="button-group">
 		<%= link_to 'Back', technologies_path, class: 'small secondary button' %>
 	</div>
-	<% if @technology.active? %>
+	<% if @technology.active? && logged_in? %>
 	<div class="button-group">
 		<%= link_to 'Edit', edit_technology_path(@technology), class: 'small button' %>
 		<%= link_to 'Delete', @technology, method: :delete, data: { confirm: 'Are you sure?' }, class: 'small alert button' %>
@@ -36,16 +36,19 @@
 			</div>
 		<% end %>
 
-		<h4 class="subheader">Recommendations</h4>
+		<% if @technology.recommends.count > 0 || logged_in? %>
+			<h4 class="subheader">Recommendations</h4>
 
-		<%= render :partial => 'recommends/recommends' %>
-		<%= render :partial => 'recommends/form' unless @technology.deleted? %>
+			<%= render :partial => 'recommends/recommends' %>
+			<%= render :partial => 'recommends/form' unless @technology.deleted? %>
+		<% end %>
 
-		<h4 class="subheader">Comments</h4>
+		<% if @technology.comments.count > 0 || logged_in? %>
+			<h4 class="subheader">Comments</h4>
 
-		<%= render :partial => 'comments/comments' %>
-		<%= render :partial => 'comments/form' unless @technology.deleted? %>
-
+			<%= render :partial => 'comments/comments' %>
+			<%= render :partial => 'comments/form' unless @technology.deleted? %>
+		<% end %>
 	</div>
 
 	<div class="large-4 columns">

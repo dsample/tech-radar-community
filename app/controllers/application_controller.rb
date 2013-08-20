@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
 	end
 
 	def logged_in?
-		current_user.nil?
+		current_user.present?
 	end
 	
 	def provider_name(provider)
@@ -40,5 +40,5 @@ class ApplicationController < ActionController::Base
       true
     end
   end
-	
+
 end

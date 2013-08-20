@@ -2,9 +2,11 @@
 	<div class="button-group">
 		<%= link_to 'Back', categories_path, class: 'small secondary button' %>
 	</div>
+	<% if logged_in? %>
 	<div class="button-group">
 		<%= link_to 'Edit', edit_category_path(@category), class: 'small button' %>
 	</div>
+	<% end %>
 </div>
 
 <h2><%= @category.name.pluralize %></h2>

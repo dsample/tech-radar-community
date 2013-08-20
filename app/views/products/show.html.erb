@@ -2,18 +2,24 @@
 	<div class="button-group">
 		<%= link_to 'Back', products_path, class: 'small secondary button' %>
 	</div>
+	<% if logged_in? %>
 	<div class="button-group">
 		<%= link_to 'Edit', edit_product_path(@product), class: 'small button' %>
 		<%= link_to 'Delete', @product, method: :delete, data: { confirm: 'Are you sure?' }, class: 'small alert button' %>
 	</div>
+	<% end %>
 </div>
 
 <h1><%= @product.name %></h1>
 
-<%= render :partial => 'usage' %>
+<% if logged_in? %>
+	<%= render :partial => 'usage' %>
+<% end %>
 <%= render :partial => 'usages' %>
 
-<h3>Comments</h3>
+<% if @product.comments.count > 0 || logged_in? %>
+	<h3>Comments</h3>
 
-<%= render :partial => 'comments/comments' %>
-<%= render :partial => 'comments/form' %>
+	<%= render :partial => 'comments/comments' %>
+	<%= render :partial => 'comments/form' %>
+<% end %>

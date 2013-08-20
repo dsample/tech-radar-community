@@ -23,6 +23,12 @@
     <!-- Right Nav Section -->
     <ul class="right">
       <li class="divider hide-for-small"></li>
+        <% if current_user %>
+          <li><%= link_to "Sign out", :signout %></li>
+        <% else %>
+          <li><%= link_to "Login / Register", :login %></li>
+        <% end %>
+      <% if logged_in? %>
       <li class="has-dropdown"><a href="#">Admin</a>
 
         <ul class="dropdown">
@@ -36,6 +42,7 @@
           <% end %>
         </ul>
       </li>
+      <% end %>
     </ul>
   </section>
 </nav>
