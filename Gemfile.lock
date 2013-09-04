@@ -76,6 +76,7 @@ GEM
     omniauth (1.1.4)
       hashie (>= 1.2, < 3)
       rack
+    pg (0.16.0)
     polyglot (0.3.3)
     rack (1.4.5)
     rack-cache (1.2)
@@ -150,6 +151,7 @@ DEPENDENCIES
   jquery-rails
   mingle4r
   omniauth
+  pg
   rails (= 3.2.11)
   rdiscount
   rspec-rails
