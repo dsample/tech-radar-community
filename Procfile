@@ -1,2 +1,1 @@
-web: bundle exec unicorn -p $PORT -E $RACK_ENV
-#web: bundle exec puma -p $PORT -E $RAKE_ENV
+web: bundle exec rails server thin -p $PORT -e $RACK_ENV
