@@ -1,4 +1,7 @@
 class TechnologiesController < ApplicationController
+
+  before_filter :authenticate_user!, only: [:new, :edit, :create, :update, :destroy]
+
   # GET /technologies
   # GET /technologies.json
   def index
