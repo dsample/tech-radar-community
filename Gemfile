@@ -9,10 +9,14 @@ gem 'omniauth'
 gem 'rdiscount'
 gem 'mingle4r'
 
-gem 'sqlite3'
 
 group :development, :test do
   gem 'rspec-rails'
+  gem 'sqlite3'
+end
+
+group :production do
+  gem 'pg'
 end
 
 # Gems used only for assets and not required
