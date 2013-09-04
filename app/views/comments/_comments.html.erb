@@ -2,6 +2,7 @@
 <% @comments.each do |comment| %>
   <div class="comment panel">
   	<div class="comment-details">
+  		<div><%= comment.user.name %></div>
 	  	<time datetime="<%= comment.created_at.strftime('%FT%H:%M:S%Z') %>"><%= comment.created_at.strftime('%F %H:%M') %></time>
   	</div>
   	<div class="comment-body">

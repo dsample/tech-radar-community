@@ -21,9 +21,8 @@ class Identity < ActiveRecord::Base
           identity.profile_url = auth["extra"]["raw_info"]["link"]
         when "twitter", "twitter_full"
           identity.provider = "twitter"
-          #identity.name = ""
+          identity.name = auth["info"]["name"]
           #raise auth["extra"]["access_token"].response["header"].to_yaml
-
           identity.username = auth["info"]["nickname"]
           identity.access_token = auth["credentials"]["token"]
           identity.token_secret = auth["credentials"]["secret"]
@@ -32,7 +31,7 @@ class Identity < ActiveRecord::Base
           identity.profile_url = auth["info"]["urls"]["Twitter"]
         when "facebook"
           identity.provider = "facebook"
-          #identity.name = ""
+          identity.name = auth["info"]["name"]
           identity.username = auth["info"]["nickname"]
           identity.access_token = auth["credentials"]["token"]
           identity.refresh_token = auth["credentials"]["refresh_token"]
@@ -41,7 +40,7 @@ class Identity < ActiveRecord::Base
           identity.profile_url = auth["info"]["urls"]["Facebook"]
         when "developer"
         	identity.provider = "developer"
-        	identity.name = "developer"
+        	identity.name = auth["info"]["name"]
         	identity.username = auth["info"]["email"]
         else
           raise auth.to_yaml

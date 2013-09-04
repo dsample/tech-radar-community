@@ -28,7 +28,8 @@ class RecommendsController < ApplicationController
   # POST /recommends.json
   def create
     @recommend = @recommendable.recommends.new(params[:recommend])
-
+    @recommend.user = current_user
+    
     respond_to do |format|
       if @recommend.save
         flash[:success] = 'Recommendation created.'

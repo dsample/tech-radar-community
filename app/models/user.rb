@@ -4,4 +4,9 @@ class User < ActiveRecord::Base
   has_many :identities, :class_name => "Identity"
   has_many :comments
   has_many :recommends
+
+  def name
+  	display_name || identities.first.name
+  end
+
 end

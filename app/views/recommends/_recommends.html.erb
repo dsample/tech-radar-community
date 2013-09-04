@@ -3,6 +3,7 @@
   <div class="recommendation panel">
   	<div class="recommendation-details">
   		<div class="recommendation-type"><%= recommendation.recommendation.name.titleize %></div>
+  		<div class="recommendation-user"><%= recommendation.user.name %></div>
 	  	<time class="right" datetime="<%= recommendation.created_at.strftime('%FT%H:%M:S%Z') %>"><%= recommendation.created_at.strftime('%F %H:%M') %></time>
   	</div>
   	<div class="recommendation-context">
