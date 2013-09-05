@@ -7,7 +7,11 @@ gem 'rails', '3.2.11'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
+gem 'json'
+gem 'oauth2'
 gem 'omniauth'
+gem 'omniauth-google-oauth2'
+
 gem 'rdiscount'
 gem 'mingle4r'
 
