@@ -54,8 +54,8 @@ class Identity < ActiveRecord::Base
 			when "google"
 				if Time.at(self.expires_at_string.to_i) < DateTime.now
 					## http://stackoverflow.com/questions/12572723/rails-google-client-api-unable-to-exchange-a-refresh-token-for-access-token
-					client = OAuth2::Client.new OAUTH_KEYS_CONFIG['google']['client_id'], 
-																			OAUTH_KEYS_CONFIG['google']['client_secret'],
+					client = OAuth2::Client.new ENV['GOOGLE_CLIENT_ID'], 
+																			ENV['GOOGLE_CLIENT_SECRET'],
 																			{
 																				:site => 'https://accounts.google.com',
 																				:authorize_url => "/o/oauth2/auth",
