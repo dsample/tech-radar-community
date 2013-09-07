@@ -1,11 +1,11 @@
 <div id="comments">
 <% @comments.each do |comment| %>
-  <div class="comment panel">
+  <div itemprop="post-comment" class="comment panel">
   	<div class="comment-details">
-  		<div><%= comment.user.name %></div>
-	  	<time datetime="<%= comment.created_at.strftime('%FT%H:%M:S%Z') %>"><%= comment.created_at.strftime('%F %H:%M') %></time>
+  		<div itemprop="creator"><%= comment.user.name %></div>
+	  	<time itemprop="commentTime" datetime="<%= comment.created_at.strftime('%FT%H:%M:S%Z') %>"><%= comment.created_at.strftime('%F %H:%M') %></time>
   	</div>
-  	<div class="comment-body">
+  	<div itemprop="commentText" class="comment-body">
     	<%= md comment.body %>
   	</div>
   </div>

@@ -16,16 +16,16 @@
 	<p class="alert-box">This technology has been deleted so it's readonly.</p>
 <% end %>
 
-<div class="row">
+<div itemscope itemtype="http://schema.org/Thing" class="row">
 	<div class="large-8 columns">
 
-		<h3><%= @technology.name %></h3>
+		<h3 itemprop="name"><%= @technology.name %></h3>
 		<% if @technology.recommends.count > 0 %>
 			<p>Current recommendation: <strong style="color: blue;"><%= @technology.recommends.last.recommendation.name.titleize %></strong></p>
 		<% end %>
 
 		<% unless @technology.summary.to_s.empty? %>
-			<div>
+			<div itemprop="description">
 			  <%= md @technology.summary.to_s %>
 			</div>
 		<% end %>
