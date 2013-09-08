@@ -3,15 +3,13 @@ module OmniAuth
     def provider_patch(klass, *args, &block)
       @@providers ||= []
 
-      puts "args: "
-      puts args.inspect
-
-      @@providers << { 
-      	provider: klass, 
-      	name: ( args.present? ? args[2][:name] || klass : klass )
-      } if klass != 'developer'
-
-      puts @@providers
+      if klass.to_s != 'developer'
+	    @@providers << { 
+	    	provider: klass, 
+	      	name: ( args.present? ? (args[2][:name] || klass) : klass ),
+	      	label: ( args.present? ? ( args[2][:label].to_s || args[2][:name].to_s.titleize ) : klass.to_s.titleize )
+	    }
+	  end
 
       old_provider(klass, *args, &block)
     end
@@ -31,6 +29,7 @@ Rails.application.config.middleware.use OmniAuth::Builder do
     if ENV['GOOGLE_CLIENT_ID'].present? && ENV['GOOGLE_CLIENT_SECRET'].present?
     	provider :google_oauth2, ENV['GOOGLE_CLIENT_ID'], ENV['GOOGLE_CLIENT_SECRET'],
                     :name => "google",
+    				:label => "Google",
                     :scope => 'userinfo.profile,userinfo.email',
                     :access_type => 'offline',
                     :approval_prompt => ( Rails.env.production? ? 'auto' : 'force' ) # 'auto' / 'force'
