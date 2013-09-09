@@ -1,0 +1,17 @@
+.welcome {
+
+	$vertical-padding: 50px;
+
+	padding-top: $vertical-padding;
+	padding-bottom: $vertical-padding;
+
+	&.roadmap {
+		//background-color: blue;
+		border-bottom: 1px solid #666;
+		padding-bottom: 0;
+	}
+
+	&.track {
+		//background-color: red;
+	}
+}
