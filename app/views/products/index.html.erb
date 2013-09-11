@@ -28,5 +28,5 @@
   </tbody>
 </table>
 <% else %>
-<p><em>There no products to list</em></p>
+  <p class="secondary alert-box">There are no products yet&hellip; <%= link_to 'create one', new_product_path %>.</p>
 <% end %>
