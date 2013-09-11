@@ -1,7 +1,5 @@
 class CategoriesController < TenantController
 
-  before_filter :authenticate_user! #, only: [:new, :edit, :create, :update, :destroy]
-
   # GET /categories
   # GET /categories.json
   def index

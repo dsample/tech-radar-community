@@ -1,5 +1,4 @@
 class ProductTechnologiesController < TenantController
-  before_filter :authenticate_user! #, only: [:new, :edit, :create, :update, :destroy]
 
   # GET /product_technologies
   # GET /product_technologies.json

@@ -3,6 +3,7 @@ require 'acts_as_tenant'
 class TenantController < ApplicationController
   set_current_tenant_through_filter
   before_filter :set_tenant
+  before_filter :authenticate_user!
 
   layout 'tenant'
 

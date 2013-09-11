@@ -1,5 +1,4 @@
 class RecommendationsController < TenantController
-  before_filter :authenticate_user!
 
   # GET /recommendations
   # GET /recommendations.json
