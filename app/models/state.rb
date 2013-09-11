@@ -1,4 +1,6 @@
 class State < ActiveRecord::Base
+  acts_as_tenant(:company)
+
 	has_many :product_technologies, :dependent => :delete_all
 	has_many :products, :through => :product_technologies
 	has_many :technologies, :through => :product_technologies

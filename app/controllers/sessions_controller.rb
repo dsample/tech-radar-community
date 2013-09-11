@@ -1,4 +1,4 @@
-class SessionsController < ApplicationController
+class SessionsController < TenantController
 	protect_from_forgery :except => [:create]
 
 	def login

@@ -1,4 +1,4 @@
-class TechnologiesController < ApplicationController
+class TechnologiesController < TenantController
 
   before_filter :authenticate_user! #, only: [:new, :edit, :create, :update, :destroy]
 
@@ -47,6 +47,11 @@ class TechnologiesController < ApplicationController
     @technology = Technology.new
     @categories = Category.find(:all)
 
+    if @categories.count == 0
+      flash[:error] = 'You need to create a category before you can create a technology'
+      redirect_to new_category_path and return
+    end
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @technology }
@@ -71,6 +76,7 @@ class TechnologiesController < ApplicationController
   # POST /technologies.json
   def create
     @technology = Technology.new(params[:technology])
+    @categories = Category.find(:all)
 
     respond_to do |format|
       if @technology.save
@@ -88,6 +94,7 @@ class TechnologiesController < ApplicationController
   # PUT /technologies/1.json
   def update
     @technology = Technology.find(params[:id])
+    @categories = Category.find(:all)
 
     respond_to do |format|
 

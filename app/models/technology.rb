@@ -1,10 +1,14 @@
 class Technology < ActiveRecord::Base
+  acts_as_tenant(:company)
+
   belongs_to :category
   has_many :product_technologies, :dependent => :delete_all
   has_many :products, :through => :product_technologies
   has_many :comments, :as => :commentable, :dependent => :delete_all
   has_many :recommends, :as => :recommendable
   attr_accessible :category_id, :description, :name, :summary
+
+  validates :category, :name, :presence => true
 
   before_destroy :confirm_orphan
 

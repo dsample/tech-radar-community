@@ -1,4 +1,4 @@
-class RecommendsController < ApplicationController
+class RecommendsController < TenantController
   before_filter :authenticate_user! #, only: [:new, :create]
   before_filter :load_recommendable
 

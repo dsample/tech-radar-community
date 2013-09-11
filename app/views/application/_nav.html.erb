@@ -9,16 +9,6 @@
   </ul>
 
   <section class="top-bar-section">
-    <!-- Left Nav Section -->
-    <ul class="left">
-      <li class="divider"></li>
-      <% ['categories', 'technologies', 'products'].each do |item| %>
-        <li <%=params['controller'].parameterize == item.parameterize ? 'class=active' : '' %>>
-          <%= link_to item.titleize, {:controller => item} %>
-        </li>
-        <li class="divider"></li>
-      <% end %>
-    </ul>
 
     <!-- Right Nav Section -->
     <ul class="right">
@@ -29,17 +19,11 @@
           <li><%= link_to "Login / Register", :login %></li>
         <% end %>
       <% if logged_in? %>
+      <li class="divider hide-for-small"></li>
       <li class="has-dropdown"><a href="#">Admin</a>
 
         <ul class="dropdown">
-          <li><label>Configuration</label></li>
-          <% [ 
-            { name: 'Recommendation types', controller: 'recommendations' }, 
-            { name: 'Product implementation states', controller: 'states' } ].each do |item| %>
-            <li <%=params['controller'].parameterize == item[:controller].to_s.parameterize ? 'class=active' : '' %>>
-              <%= link_to item[:name].to_s.titleize, {:controller => item[:controller].to_s} %>
-            </li>
-          <% end %>
+          <li><label>Company</label></li>
         </ul>
       </li>
       <% end %>

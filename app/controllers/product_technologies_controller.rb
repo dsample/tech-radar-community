@@ -1,4 +1,4 @@
-class ProductTechnologiesController < ApplicationController
+class ProductTechnologiesController < TenantController
   before_filter :authenticate_user! #, only: [:new, :edit, :create, :update, :destroy]
 
   # GET /product_technologies

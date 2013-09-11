@@ -1,4 +1,4 @@
-class CommentsController < ApplicationController
+class CommentsController < TenantController
   before_filter :authenticate_user! #, only: [:new, :create]
   before_filter :load_commentable
 

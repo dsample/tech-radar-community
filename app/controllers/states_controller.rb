@@ -1,4 +1,4 @@
-class StatesController < ApplicationController
+class StatesController < TenantController
   before_filter :authenticate_user!
 
   # GET /states

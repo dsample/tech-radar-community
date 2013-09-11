@@ -1,4 +1,6 @@
 class Category < ActiveRecord::Base
+  acts_as_tenant(:company)
+
 	has_many :technologies
   attr_accessible :description, :name
 

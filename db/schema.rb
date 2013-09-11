@@ -11,13 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130820221516) do
+ActiveRecord::Schema.define(:version => 20130910204859) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
     t.text     "description"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.integer  "company_id"
   end
 
   create_table "comments", :force => true do |t|
@@ -27,10 +28,18 @@ ActiveRecord::Schema.define(:version => 20130820221516) do
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
     t.integer  "user_id"
+    t.integer  "company_id"
   end
 
   add_index "comments", ["commentable_id"], :name => "index_comments_on_commentable_id"
   add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
+
+  create_table "companies", :force => true do |t|
+    t.string   "name"
+    t.string   "slug"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "identities", :force => true do |t|
     t.integer  "user_id"
@@ -70,6 +79,7 @@ ActiveRecord::Schema.define(:version => 20130820221516) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "company_id"
   end
 
   create_table "recommendations", :force => true do |t|
@@ -87,6 +97,7 @@ ActiveRecord::Schema.define(:version => 20130820221516) do
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
     t.integer  "user_id"
+    t.integer  "company_id"
   end
 
   add_index "recommends", ["recommendable_id"], :name => "index_recommends_on_recommendable_id"
@@ -97,6 +108,7 @@ ActiveRecord::Schema.define(:version => 20130820221516) do
     t.text     "description"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.integer  "company_id"
   end
 
   create_table "technologies", :force => true do |t|
@@ -107,6 +119,7 @@ ActiveRecord::Schema.define(:version => 20130820221516) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.datetime "deleted_at"
+    t.integer  "company_id"
   end
 
   add_index "technologies", ["category_id"], :name => "index_technologies_on_category_id"

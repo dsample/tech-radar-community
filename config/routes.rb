@@ -1,24 +1,33 @@
 Techradarcommunity::Application.routes.draw do
 
-  get 'radar' => "radar#index"
-
-  resources :products do
-    resources :comments
-    resources :product_technologies, path: 'usage', only: [:create] #, as: 'usage'
-  end
-  resources :technologies do
-    resources :comments
-    resources :recommends
-  end
-  resources :product_technologies
-
-  resources :categories
-  resources :recommendations
-  resources :states
-
   match "/auth/:provider/callback" => "sessions#create", :as => :auth
   match "/signout" => "sessions#destroy", :as => :signout
   match "/login" => "sessions#login", :as => :login
+
+  resources :companies
+
+  scope ":company_slug" do
+
+    root to: "radar#index", as: :tenant_root
+
+    get 'radar' => "radar#index"
+
+    resources :products do
+      resources :comments
+      resources :product_technologies, path: 'usage', only: [:create] #, as: 'usage'
+    end
+    resources :technologies do
+      resources :comments
+      resources :recommends
+    end
+    resources :product_technologies
+
+    resources :categories
+    resources :recommendations
+    resources :states
+
+  end
+
 
 
   # The priority is based upon order of creation:
@@ -70,7 +79,7 @@ Techradarcommunity::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'radar#index'
+  root :to => 'home#index'
 
   # See how all your routes lay out with "rake routes"
 
