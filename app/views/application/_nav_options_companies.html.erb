@@ -1,0 +1,5 @@
+<li><label>Your companies</label></li>
+<% current_user.companies.uniq.each do |company| %>
+  <li><%= link_to company.name, tenant_root_path(company) %></li>
+<% end %>
+<li><%= link_to "Create new company", new_company_path %></li>

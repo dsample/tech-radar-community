@@ -24,13 +24,13 @@
         <td><%= link_to technology.name, technology %></td>
         <td><%= md technology.summary.to_s %></td>
         <td>
-          <%= link_to image_tag('pencil.png', alt: 'Edit technology', title: 'Edit technology' ), edit_technology_path(technology), class: 'small secondary inline button' %>
-          <%= link_to image_tag('delete.png', alt: 'Delete technology', title: 'Delete technology' ), technology, method: :delete, data: { confirm: 'Are you sure?' }, class: 'small secondary inline button' %>
+          <%= link_to_if has_permission_to?('create_technologies'), image_tag('pencil.png', alt: 'Edit technology', title: 'Edit technology' ), edit_technology_path(technology), class: 'small secondary inline button' %>
+          <%= link_to_if has_permission_to?('delete_technologies'), image_tag('delete.png', alt: 'Delete technology', title: 'Delete technology' ), technology, method: :delete, data: { confirm: 'Are you sure?' }, class: 'small secondary inline button' %>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 <% else %>
-  <p class="secondary alert-box">There are no technologies yet&hellip; <%= link_to 'create one', new_technology_path %>.</p>
+  <p class="secondary alert-box">There are no technologies yet<% if has_permission_to?('create_technologies') %>&hellip; <%= link_to 'create one', new_technology_path %><% end %>.</p>
 <% end %>

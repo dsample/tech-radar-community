@@ -1,10 +1,11 @@
 class Category < ActiveRecord::Base
   acts_as_tenant(:company)
 
+  belongs_to :company
 	has_many :technologies
   attr_accessible :description, :name
 
-  validates :name, :description, :presence => true
+  validates :name, :presence => true
 
   before_destroy :confirm_orphan
 

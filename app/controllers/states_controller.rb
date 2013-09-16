@@ -1,4 +1,5 @@
 class StatesController < TenantController
+  before_filter {has_permission_to? 'manage_implementation_states'}
 
   # GET /states
   # GET /states.json

@@ -1,4 +1,6 @@
 class TechnologiesController < TenantController
+  before_filter only: [:create, :new, :edit, :update] {has_permission_to? 'create_technologies'}
+  before_filter only: [:destroy] {has_permission_to? 'delete_technologies'}
 
   # GET /technologies
   # GET /technologies.json

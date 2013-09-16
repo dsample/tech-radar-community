@@ -6,3 +6,36 @@ en:
     attributes:
       comment:
         body: "Message"
+  category:
+    name:
+      techniques: "Techniques"
+      platforms: "Platforms"
+      tools: "Tools"
+      languages_and_frameworks: "Languages & Frameworks"
+    description:
+      techniques: ""
+      platforms: ""
+      tools: ""
+      languages_and_frameworks: ""
+  implementation_state:
+    name:
+      trialing: "Trialing"
+      adopting: "Adopting"
+      in_production_use: "In production use"
+      deprecated: "Deprecated"
+    description:
+      trialing: "The product is trialing/prototyping the use of this technology."
+      adopting: "The technology is being implemented, but is not yet live."
+      in_production_use: "The technology is being used within the product either within the live system or as a development tool."
+      deprecated: "The technology is no longer used in the product."
+  recommendation_state:
+    name:
+      adopt: "Adopt"
+      trial: "Trial"
+      assess: "Assess"
+      hold: "Hold"
+    description:
+      adopt: "Adopt this technology."
+      trial: "This technology is being trialed."
+      assess: "This is a technology to watch out for."
+      hold: "The technology should be used with caution and avoided where an alternative exists."

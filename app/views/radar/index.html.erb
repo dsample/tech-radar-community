@@ -5,7 +5,7 @@
 
 	<ul class="no-bullet">
 	<% category.technologies.each do |tech| %>
-		<li><%=link_to tech.name, tech %></li>
+		<li><%=link_to tech.name, technology_path(tech, company: current_tenant) %></li>
 	<% end %>
 	</ul>
 <% end %>

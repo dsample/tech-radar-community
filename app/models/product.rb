@@ -1,6 +1,7 @@
 class Product < ActiveRecord::Base
   acts_as_tenant(:company)
 
+  belongs_to :company
   has_many :product_technologies, :dependent => :delete_all
   has_many :technologies, :through => :product_technologies
   has_many :states, :through => :product_technologies

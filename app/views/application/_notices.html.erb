@@ -1,0 +1,3 @@
+<%= content_tag(:p, flash[:info], :class => 'alert-box') if flash[:info] %>
+<%= content_tag(:p, flash[:success], :class => 'success alert-box') if flash[:success] %>
+<%= content_tag(:p, flash[:error], :class => 'alert alert-box') if flash[:error] %>

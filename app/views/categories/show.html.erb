@@ -2,9 +2,10 @@
 	<div class="button-group">
 		<%= link_to 'Back', categories_path, class: 'small secondary button' %>
 	</div>
-	<% if logged_in? %>
+	<% if logged_in? && has_permission_to?('manage_categories') %>
 	<div class="button-group">
 		<%= link_to 'Edit', edit_category_path(@category), class: 'small button' %>
+		<%= link_to 'Delete', @category, method: :delete, data: { confirm: 'Are you sure?' }, class: 'small alert button' %>
 	</div>
 	<% end %>
 </div>
@@ -18,7 +19,7 @@
 <% if @category.technologies.count > 0 %>
 	<dl class="no-bullet">
 		<% @category.technologies.each do |tech| %>
-			<dt><%= link_to(tech.name, tech) %></dt>
+			<dt><%= link_to tech.name, tech %></dt>
 			<dd><%= md tech.summary.to_s %></dd>
 		<% end %>
 	</dl>

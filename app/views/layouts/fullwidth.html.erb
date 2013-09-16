@@ -25,16 +25,13 @@
 
     <%= render :partial => "nav" %>
 
-    <div class="large-12">
-
-      <%= content_tag(:p, flash[:info], :class => 'alert-box') if flash[:info] %>
-      <%= content_tag(:p, flash[:success], :class => 'success alert-box') if flash[:success] %>
-      <%= content_tag(:p, flash[:error], :class => 'alert alert-box') if flash[:error] %>
-
-      <%= yield %>
+    <div class="row">
+      <div class="large-12">
+        <%= render :partial => 'notices' %>
+      </div>
     </div>
 
-    <%= render :partial => 'markdown' %>
+    <%= yield %>
 
     <%= render :partial => 'footer' %>
 

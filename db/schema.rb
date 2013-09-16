@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130910204859) do
+ActiveRecord::Schema.define(:version => 20130915211116) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -63,6 +63,16 @@ ActiveRecord::Schema.define(:version => 20130910204859) do
   add_index "identities", ["refresh_token"], :name => "index_identities_on_refresh_token"
   add_index "identities", ["user_id"], :name => "index_identities_on_user_id"
 
+  create_table "permissions", :force => true do |t|
+    t.string   "name"
+    t.string   "slug"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "permissions", ["slug"], :name => "index_permissions_on_slug"
+
   create_table "product_technologies", :force => true do |t|
     t.integer  "product_id"
     t.integer  "technology_id"
@@ -87,6 +97,7 @@ ActiveRecord::Schema.define(:version => 20130910204859) do
     t.text     "description"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.integer  "company_id"
   end
 
   create_table "recommends", :force => true do |t|
@@ -102,6 +113,23 @@ ActiveRecord::Schema.define(:version => 20130910204859) do
 
   add_index "recommends", ["recommendable_id"], :name => "index_recommends_on_recommendable_id"
   add_index "recommends", ["user_id"], :name => "index_recommends_on_user_id"
+
+  create_table "role_permissions", :force => true do |t|
+    t.integer  "role_id"
+    t.integer  "permission_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "role_permissions", ["permission_id"], :name => "index_role_permissions_on_permission_id"
+  add_index "role_permissions", ["role_id"], :name => "index_role_permissions_on_role_id"
+
+  create_table "roles", :force => true do |t|
+    t.integer  "company_id"
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "states", :force => true do |t|
     t.string   "name"
@@ -123,6 +151,18 @@ ActiveRecord::Schema.define(:version => 20130910204859) do
   end
 
   add_index "technologies", ["category_id"], :name => "index_technologies_on_category_id"
+
+  create_table "user_company_roles", :force => true do |t|
+    t.integer  "company_id"
+    t.integer  "user_id"
+    t.integer  "role_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "user_company_roles", ["company_id"], :name => "index_user_company_roles_on_company_id"
+  add_index "user_company_roles", ["role_id"], :name => "index_user_company_roles_on_role_id"
+  add_index "user_company_roles", ["user_id"], :name => "index_user_company_roles_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "username",     :default => "", :null => false

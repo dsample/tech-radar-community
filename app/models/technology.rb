@@ -1,6 +1,7 @@
 class Technology < ActiveRecord::Base
   acts_as_tenant(:company)
 
+  belongs_to :company
   belongs_to :category
   has_many :product_technologies, :dependent => :delete_all
   has_many :products, :through => :product_technologies

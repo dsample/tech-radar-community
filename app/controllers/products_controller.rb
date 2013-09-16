@@ -1,4 +1,7 @@
 class ProductsController < TenantController
+  before_filter only: [:create, :new, :edit, :update] {has_permission_to? 'create_products'}
+  before_filter only: [:destroy] {has_permission_to? 'delete_products'}
+
 
   # GET /products
   # GET /products.json

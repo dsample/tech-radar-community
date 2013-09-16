@@ -4,8 +4,8 @@
 	</div>
 	<% if @technology.active? && logged_in? %>
 	<div class="button-group">
-		<%= link_to 'Edit', edit_technology_path(@technology), class: 'small button' %>
-		<%= link_to 'Delete', @technology, method: :delete, data: { confirm: 'Are you sure?' }, class: 'small alert button' %>
+		<%= link_to_if has_permission_to?('create_technologies'), 'Edit', edit_technology_path(@technology), class: 'small button' %>
+		<%= link_to_if has_permission_to?('delete_technologies'), 'Delete', @technology, method: :delete, data: { confirm: 'Are you sure?' }, class: 'small alert button' %>
 	</div>
 	<% end %>
 </div>
@@ -40,7 +40,9 @@
 			<h4 class="subheader">Recommendations</h4>
 
 			<%= render :partial => 'recommends/recommends' %>
-			<%= render :partial => 'recommends/form' unless @technology.deleted? %>
+			<% if has_permission_to?('post_recommendations') %>
+				<%= render :partial => 'recommends/form' unless @technology.deleted? %>
+			<% end %>
 		<% end %>
 
 		<% if @technology.comments.count > 0 || logged_in? %>

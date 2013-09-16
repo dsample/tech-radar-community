@@ -1,4 +1,5 @@
 class ProductTechnologiesController < TenantController
+  before_filter except: [:index, :show] {has_permission_to? 'post_implementations'}
 
   # GET /product_technologies
   # GET /product_technologies.json
@@ -51,7 +52,7 @@ class ProductTechnologiesController < TenantController
           if params[:product_id]
             redirect_to Product.find(params[:product_id])
           else
-            redirect_to @product_technology 
+            redirect_to @product_technology
           end
         }
         format.json { render json: @product_technology, status: :created, location: @product_technology }
@@ -78,15 +79,16 @@ class ProductTechnologiesController < TenantController
     end
   end
 
+
   # DELETE /product_technologies/1
   # DELETE /product_technologies/1.json
-  def destroy
-    @product_technology = ProductTechnology.find(params[:id])
-    @product_technology.destroy
-
-    respond_to do |format|
-      format.html { redirect_to product_technologies_url }
-      format.json { head :no_content }
-    end
-  end
+#  def destroy
+#    @product_technology = ProductTechnology.find(params[:id])
+#    @product_technology.destroy
+#
+#    respond_to do |format|
+#      format.html { redirect_to product_technologies_url }
+#      format.json { head :no_content }
+#    end
+#  end
 end

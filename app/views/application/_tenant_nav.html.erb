@@ -2,7 +2,7 @@
   <ul class="title-area">
     <!-- Title Area -->
     <li class="name">
-      <h1><%= link_to (content_for?(:title) ? yield(:title) : "Tech Radar"), tenant_root_path %></h1>
+      <h1><%= link_to (content_for?(:title) ? yield(:title) : current_tenant.name), tenant_root_path %></h1>
     </li>
     <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
     <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
@@ -31,16 +31,21 @@
 
       <% if logged_in? %>
       <li class="divider hide-for-small"></li>
-      <li class="has-dropdown"><a href="#">Admin</a>
+      <li class="has-dropdown"><a href="#">Options</a>
         <ul class="dropdown">
+          <li><%= link_to 'Edit company profile', edit_company_url(current_tenant) %></li>
           <li><label>Configuration</label></li>
           <% [ 
-            { name: 'Recommendation types', controller: 'recommendations' }, 
-            { name: 'Product implementation states', controller: 'states' } ].each do |item| %>
-            <li <%=params['controller'].parameterize == item[:controller].to_s.parameterize ? 'class=active' : '' %>>
-              <%= link_to item[:name].to_s.titleize, {:controller => item[:controller].to_s} %>
-            </li>
+            { name: 'Permissions', controller: 'roles', condition: has_permission_to?('manage_permissions') },
+            { name: 'Recommendation types', controller: 'recommendations', condition: has_permission_to?('manage_recommendation_states') }, 
+            { name: 'Product implementation states', controller: 'states', condition: has_permission_to?('manage_implementation_states') } ].each do |item| %>
+            <% if item[:condition] %>
+              <li <%=params['controller'].parameterize == item[:controller].to_s.parameterize ? 'class=active' : '' %>>
+                <%= link_to item[:name].to_s.titleize, {:controller => item[:controller].to_s} %>
+              </li>
+            <% end %>
           <% end %>
+          <%= render partial: 'nav_options_companies' %>
         </ul>
       </li>
       <% end %>

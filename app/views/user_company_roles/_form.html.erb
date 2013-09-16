@@ -1,0 +1,21 @@
+<%= form_for UserCompanyRole.new, url: role_members_path, :html => {:class => "custom"} do |f| %>
+  <fieldset>
+    <legend>Assign a user a role</legend>
+
+    <div class="row">
+      <div class="large-4 columns">
+
+	<%= f.label :role_id %>
+	<%= f.select :role_id, options_for_select(Role.all.map{|x| [x.name, x.id] }), class: ['medium', 'custom', 'dropdown'] %>
+      </div>
+      <div class="large-7 columns">
+	<%= f.label :role_id %>
+	<%= f.select :role_id, options_for_select(Role.all.map{|x| [x.name, x.id] }), class: ['medium', 'custom', 'dropdown'] %>
+      </div>
+      <div class="large-1 columns">
+        <br />
+        <%= f.submit "Assign", class: 'small expand button' %>
+      </div>
+    </div>
+  </fieldset>
+<% end %>

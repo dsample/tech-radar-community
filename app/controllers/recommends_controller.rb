@@ -1,4 +1,5 @@
 class RecommendsController < TenantController
+  before_filter except: [:index] {has_permission_to? 'post_recommendations'}
   before_filter :load_recommendable
 
   # GET /recommends

@@ -2,7 +2,9 @@
 
 <div class="button-bar">
   <ul class="button-group">
-    <li><%= link_to 'Create Product', new_product_path, :class => ['small', 'button'] %></li>
+    <% if has_permission_to?('create_products') %>
+      <li><%= link_to 'Create Product', new_product_path, :class => ['small', 'button'] %></li>
+    <% end %>
   </ul>
 </div>
 
@@ -20,13 +22,13 @@
       <tr>
         <td><%= link_to product.name, product %></td>
         <td>
-          <%= link_to image_tag('pencil.png', alt: 'Edit product', title: 'Edit product' ), edit_product_path(product), class: 'small secondary inline button' %>
-          <%= link_to image_tag('delete.png', alt: 'Delete product', title: 'Delete product' ), product, method: :delete, data: { confirm: 'Are you sure?' }, class: 'small secondary inline button' %>
+          <%= link_to_if has_permission_to?('create_products'), image_tag('pencil.png', alt: 'Edit product', title: 'Edit product' ), edit_product_path(product), class: 'small secondary inline button' %>
+          <%= link_to_if has_permission_to?('delete_products'), image_tag('delete.png', alt: 'Delete product', title: 'Delete product' ), product, method: :delete, data: { confirm: 'Are you sure?' }, class: 'small secondary inline button' %>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 <% else %>
-  <p class="secondary alert-box">There are no products yet&hellip; <%= link_to 'create one', new_product_path %>.</p>
+  <p class="secondary alert-box">There are no products yet<% if has_permission_to?('create_products') %>&hellip; <%= link_to 'create one', new_product_path %><% end %>.</p>
 <% end %>

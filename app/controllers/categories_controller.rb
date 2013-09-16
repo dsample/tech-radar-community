@@ -1,4 +1,5 @@
 class CategoriesController < TenantController
+  before_filter except: [:index, :show] {has_permission_to? 'manage_categories'}
 
   # GET /categories
   # GET /categories.json

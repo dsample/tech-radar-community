@@ -1,13 +1,16 @@
 Techradarcommunity::Application.routes.draw do
 
+  get "user_company_roles/new"
+
+  get "user_company_roles/delete"
+
   match "/auth/:provider/callback" => "sessions#create", :as => :auth
   match "/signout" => "sessions#destroy", :as => :signout
   match "/login" => "sessions#login", :as => :login
 
   resources :companies
 
-  scope ":company_slug" do
-
+  scope ":company" do
     root to: "radar#index", as: :tenant_root
 
     get 'radar' => "radar#index"
@@ -22,6 +25,9 @@ Techradarcommunity::Application.routes.draw do
     end
     resources :product_technologies
 
+    resources :roles do
+      resources :user_company_roles, as: 'members', path: 'members', only: [:create, :delete]
+    end
     resources :categories
     resources :recommendations
     resources :states

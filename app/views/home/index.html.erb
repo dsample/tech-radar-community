@@ -1,0 +1,9 @@
+<h2>Companies</h2>
+
+<ul class="no-bullet">
+<% @companies.each do |company| %>
+	<li><%= link_to company.name, tenant_root_path(company) %></li>
+<% end %>
+</ul>
+
+<%= link_to "Create a new company", new_company_path, class: 'button' %>

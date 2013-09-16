@@ -1,3 +1,4 @@
+<% if Technology.count > 0 %>
 <%= form_for([@product, @product_technology], :html => {:class => "custom"}) do |f| %>
 
   <%#= f.hidden_field :product_id %>
@@ -33,4 +34,7 @@
     </div>
 
   </fieldset>
+<% end %>
+<% else %>
+  <p><em>There are no technologies available to be assigned<% if has_permission_to?('create_technologies') %>&hellip; <%= link_to 'create one', new_technology_path %><% end %>.</em></p>
 <% end %>

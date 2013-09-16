@@ -1,8 +1,8 @@
-class SessionsController < TenantController
+class SessionsController < ApplicationController
 	protect_from_forgery :except => [:create]
 
 	def login
-		redirect_to root_url if logged_in?
+		redirect_to root_url and return if logged_in?
 	end
 
   def create
@@ -54,7 +54,7 @@ class SessionsController < TenantController
 	def destroy
     session[:user_id] = nil
     flash["notice"] = "Signed out"
-    redirect_to root_url, :flash => flash
+    redirect_to root_url
   end
 	
 end

@@ -1,0 +1,26 @@
+<h1>Roles</h1>
+
+<div class="button-bar">
+  <ul class="button-group">
+    <li><%= link_to 'Create Role', new_role_path, :class => ['small', 'button'] %></li>
+  </ul>
+</div>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+  </tr>
+
+<% @roles.each do |role| %>
+  <tr>
+    <td><%= link_to role.name, role %></td>
+    <td>
+      <%= link_to image_tag('pencil.png', alt: 'Edit role', title: 'Edit role' ), edit_role_path(role), class: 'small secondary inline button' %>
+      <%= link_to image_tag('delete.png', alt: 'Delete role', title: 'Delete role' ), role, method: :delete, data: { confirm: 'Are you sure?' }, class: 'small secondary inline button' %>
+    </td>
+  </tr>
+<% end %>
+</table>
+
+<%= render partial: 'user_company_roles/form' %>

@@ -1,4 +1,5 @@
 class RecommendationsController < TenantController
+  before_filter {has_permission_to? 'manage_recommendation_states'}
 
   # GET /recommendations
   # GET /recommendations.json

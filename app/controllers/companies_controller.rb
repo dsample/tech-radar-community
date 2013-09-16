@@ -1,5 +1,6 @@
 class CompaniesController < ApplicationController
   before_filter :authenticate_user! #, only: [:new, :edit, :create, :update, :destroy]
+  #before_filter only: [:edit, :update] {has_permission_to? 'manage_company'}
 
   # GET /companies
   # GET /companies.json
@@ -15,10 +16,10 @@ class CompaniesController < ApplicationController
   # GET /companies/1
   # GET /companies/1.json
   def show
-    @company = Company.find(params[:id])
+    @company = Company.find_by_slug(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html { redirect_to tenant_root_path(@company) }
       format.json { render json: @company }
     end
   end
@@ -36,7 +37,7 @@ class CompaniesController < ApplicationController
 
   # GET /companies/1/edit
   def edit
-    @company = Company.find(params[:id])
+    @company = Company.find_by_slug(params[:id])
   end
 
   # POST /companies
@@ -46,7 +47,37 @@ class CompaniesController < ApplicationController
 
     respond_to do |format|
       if @company.save
-        format.html { redirect_to @company, notice: 'Company was successfully created.' }
+        ActsAsTenant.with_tenant(@company) do
+          admin = Role.create(name: 'Administrator')
+          admin.permissions << Permission.all
+          admin.users << current_user
+
+          developer = Role.create(name: 'Developer')
+          developer.users << current_user
+
+          Category.create([
+              {name: t('category.name.techniques'), description: t('category.description.techniques')},
+              {name: t('category.name.platforms'), description: t('category.description.platforms')},
+              {name: t('category.name.tools'), description: t('category.description.tools')},
+              {name: t('category.name.languages_and_frameworks'), description: t('category.description.languages_and_frameworks')}
+            ])
+
+          State.create([
+              {name: t('implementation_state.name.trialing'), description: t('implementation_state.description.trialing')},
+              {name: t('implementation_state.name.adopting'), description: t('implementation_state.description.adopting')},
+              {name: t('implementation_state.name.in_production_use'), description: t('implementation_state.description.in_production_use')},
+              {name: t('implementation_state.name.deprecated'), description: t('implementation_state.description.deprecated')}
+            ])
+
+          Recommendation.create([
+              {name: t('recommendation_state.name.adopt'), description: t('recommendation_state.description.adopt')},
+              {name: t('recommendation_state.name.trial'), description: t('recommendation_state.description.trial')},
+              {name: t('recommendation_state.name.assess'), description: t('recommendation_state.description.assess')},
+              {name: t('recommendation_state.name.hold'), description: t('recommendation_state.description.hold')}
+            ])
+        end
+
+        format.html { redirect_to tenant_root_path(@company), notice: 'Company was successfully created.' }
         format.json { render json: @company, status: :created, location: @company }
       else
         format.html { render action: "new" }
@@ -58,11 +89,11 @@ class CompaniesController < ApplicationController
   # PUT /companies/1
   # PUT /companies/1.json
   def update
-    @company = Company.find(params[:id])
+    @company = Company.find_by_slug(params[:id])
 
     respond_to do |format|
       if @company.update_attributes(params[:company])
-        format.html { redirect_to @company, notice: 'Company was successfully updated.' }
+        format.html { redirect_to tenant_root_path(@company), notice: 'Company was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -82,9 +113,5 @@ class CompaniesController < ApplicationController
   #    format.json { head :no_content }
   #  end
   #end
-
-  def to_param
-    slug
-  end
 
 end

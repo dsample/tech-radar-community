@@ -23,13 +23,13 @@
         <tr>
           <td><%= link_to category.name.pluralize, category %></td>
           <td>
-            <%= link_to image_tag('pencil.png', alt: 'Edit category', title: 'Edit category' ), edit_category_path(category), class: 'small secondary inline button' %>
-            <%= link_to image_tag('delete.png', alt: 'Delete category', title: 'Delete category' ), category, method: :delete, data: { confirm: 'Are you sure?' }, class: 'small secondary inline button' %>
+            <%= link_to_if has_permission_to?('manage_categories'), image_tag('pencil.png', alt: 'Edit category', title: 'Edit category' ), edit_category_path(category), class: 'small secondary inline button' %>
+            <%= link_to_if has_permission_to?('manage_categories'), image_tag('delete.png', alt: 'Delete category', title: 'Delete category' ), category, method: :delete, data: { confirm: 'Are you sure?' }, class: 'small secondary inline button' %>
           </td>
         </tr>
       <% end %>
     </tbody>
   </table>
 <% else %>
-  <p class="secondary alert-box">There are no categories yet&hellip; <%= link_to 'create one', new_category_path %>.</p>
+  <p class="secondary alert-box">There are no categories yet<% if has_permission_to?('manage_categories') %>&hellip; <%= link_to 'create one', new_category_path %><% end %>.</p>
 <% end %>
