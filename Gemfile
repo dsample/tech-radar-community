@@ -61,3 +61,6 @@ gem 'capistrano'
 # gem 'debugger'
 
 #gem 'rack-ntlm', :git => 'git://github.com/lukefx/rack-ntlm.git'
+
+# Satisfy Heroku and stop it injecting plugins
+gem 'rails_12factor'
