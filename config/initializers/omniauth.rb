@@ -17,7 +17,7 @@ module OmniAuth
     alias provider provider_patch
     class << self
       def providers
-        @@providers
+        @@providers ||= []
       end
     end
   end

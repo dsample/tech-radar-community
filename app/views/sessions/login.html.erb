@@ -9,8 +9,8 @@
 <% end %>
 
 <div class="row">
-  <% number_of_providers = OmniAuth::Builder.providers.count %>
-  <% OmniAuth::Builder.providers.each do |provider| %>
+  <% number_of_providers = @providers.count %>
+  <% @providers.each do |provider| %>
     <div class="large-<%= (12 / number_of_providers).to_i.to_s %> columns">
       <a href="/auth/<%= provider[:name] %>" class="button expand"><%= provider[:label] %></a>
     </div>

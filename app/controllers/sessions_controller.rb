@@ -3,6 +3,9 @@ class SessionsController < ApplicationController
 
 	def login
 		redirect_to root_url and return if logged_in?
+
+    @providers = OmniAuth::Builder.providers
+    render :failed_dependency, layout: true, text: 'No login providers have been configured' and return if @providers.count == 0
 	end
 
   def create
