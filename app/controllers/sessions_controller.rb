@@ -9,13 +9,13 @@ class SessionsController < ApplicationController
 	end
 
   def create
-    auth = request.env["omniauth.auth"]
+    auth = auth_hash
     ident = Identity.find_by_provider_and_uid(auth["provider"], auth["uid"])
     
 		# Is the user already logged in?
-    if session[:user_id]
+    if session[:user_id].present?
       # Yes: Does this identity already exist?
-      if ident
+      if ident.present?
         # Yes: Is it for the same user?
         if ident.user.id == current_user.id
           # Yes: Tell them it's already added
@@ -32,9 +32,10 @@ class SessionsController < ApplicationController
       end
     else
       # No: Does identity already exist?
-      if ident
+      if ident.present?
         # Yes: Log user in
-				ident.refresh_access_token
+        # Currently there is no integration with Google beyond login, so no need to refresh the access token
+				#ident.refresh_access_token
         session[:user_id] = ident.user.id
       else
         # No: Create identity, create user and log them in
@@ -47,7 +48,7 @@ class SessionsController < ApplicationController
     end
 
     #raise request.env["omniauth.auth"].to_yaml
-    if session[:return_to]
+    if session[:return_to].present?
       redirect_to session[:return_to], :flash => flash
     else
       redirect_to root_url, :flash => flash, :firsttime => firsttime
@@ -58,6 +59,12 @@ class SessionsController < ApplicationController
     session[:user_id] = nil
     flash["notice"] = "Signed out"
     redirect_to root_url
+  end
+
+  protected
+
+  def auth_hash
+    request.env["omniauth.auth"]
   end
 	
 end

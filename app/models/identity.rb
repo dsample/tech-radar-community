@@ -11,7 +11,7 @@ class Identity < ActiveRecord::Base
           identity.name = auth["info"]["name"]
           identity.username = auth["info"]["email"]
           identity.access_token = auth["credentials"]["token"]
-          if auth["credentials"]["refresh_token"]
+          if auth["credentials"]["refresh_token"].present?
               identity.refresh_token = auth["credentials"]["refresh_token"]
           end
           identity.expires = auth["credentials"]["expires"]
