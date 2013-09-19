@@ -16,10 +16,17 @@
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :slug %><br />
-    <%= f.text_field :slug %>
+    <%= f.label :slug %><small><em>Between 3-10 alphanumeric characters, and can contain dashes and underscores</em></small>
+    <div class="row collapse">
+      <div class="small-12 large-4 columns">
+        <span class="prefix text-right">http://ourtechradar.herokuapp.com/</span>
+      </div>
+      <div class="small-12 large-8 columns">
+        <%= f.text_field :slug %>
+      </div>
+    </div>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class: 'button' %>
   </div>
 <% end %>

@@ -6,6 +6,8 @@ en:
     attributes:
       comment:
         body: "Message"
+      company:
+        slug: "Short name (for URL)"
   category:
     name:
       techniques: "Techniques"

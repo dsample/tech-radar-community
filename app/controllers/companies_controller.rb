@@ -5,7 +5,7 @@ class CompaniesController < ApplicationController
   # GET /companies
   # GET /companies.json
   def index
-    @companies = Company.all
+    @companies = current_user.companies.all.uniq
 
     respond_to do |format|
       format.html # index.html.erb
@@ -37,7 +37,13 @@ class CompaniesController < ApplicationController
 
   # GET /companies/1/edit
   def edit
-    @company = Company.find_by_slug(params[:id])
+    @company = current_user.companies.find_by_slug(params[:id])
+
+    render :not_found, layout: true, text: 'Could not find the company you requested' and return if @company.blank?
+
+    ActsAsTenant.with_tenant(@company) do
+      render :unauthorized, layout: true, text: 'You do not have permissions to edit the company details' and return unless has_permission_to? 'manage_company'
+    end
   end
 
   # POST /companies
@@ -89,7 +95,13 @@ class CompaniesController < ApplicationController
   # PUT /companies/1
   # PUT /companies/1.json
   def update
-    @company = Company.find_by_slug(params[:id])
+    @company = current_user.companies.find_by_slug(params[:id])
+
+    render :not_found, layout: true, text: 'Could not find the company you requested' and return if @company.blank?
+
+    ActsAsTenant.with_tenant(@company) do
+      render :unauthorized, layout: true, text: 'You do not have permissions to edit the company details' and return unless has_permission_to? 'manage_company'
+    end
 
     respond_to do |format|
       if @company.update_attributes(params[:company])
@@ -113,5 +125,19 @@ class CompaniesController < ApplicationController
   #    format.json { head :no_content }
   #  end
   #end
+
+  def has_permission_to?(do_something)
+    has_permission = current_user.permissions.where(slug: ['manage_company', do_something]).present?
+    unless has_permission
+      flash[:error] = 'You do not have permission to do that'
+
+      respond_to do |format|
+        format.html { redirect_to tenant_root_path }
+        format.json { head :no_content }
+      end
+    end
+    return has_permission
+  end
+
 
 end

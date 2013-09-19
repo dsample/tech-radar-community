@@ -36,12 +36,12 @@
           <li><%= link_to 'Edit company profile', edit_company_url(current_tenant) %></li>
           <li><label>Configuration</label></li>
           <% [ 
-            { name: 'Permissions', controller: 'roles', condition: has_permission_to?('manage_permissions') },
+            { name: 'User management', controller: 'roles', condition: has_permission_to?('manage_permissions') },
             { name: 'Recommendation types', controller: 'recommendations', condition: has_permission_to?('manage_recommendation_states') }, 
             { name: 'Product implementation states', controller: 'states', condition: has_permission_to?('manage_implementation_states') } ].each do |item| %>
             <% if item[:condition] %>
               <li <%=params['controller'].parameterize == item[:controller].to_s.parameterize ? 'class=active' : '' %>>
-                <%= link_to item[:name].to_s.titleize, {:controller => item[:controller].to_s} %>
+                <%= link_to item[:name].to_s, {:controller => item[:controller].to_s} %>
               </li>
             <% end %>
           <% end %>
