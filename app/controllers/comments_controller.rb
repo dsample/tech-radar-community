@@ -58,7 +58,7 @@ class CommentsController < TenantController
   private
 
   def load_commentable
-    resource, id = request.path.split('/')[1, 2]
+    resource, id = request.path.split('/')[2, 3]
     @commentable = resource.singularize.classify.constantize.find(id)
   end
 end

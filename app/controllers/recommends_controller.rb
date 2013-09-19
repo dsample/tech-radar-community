@@ -73,7 +73,7 @@ class RecommendsController < TenantController
   private
 
   def load_recommendable
-    resource, id = request.path.split('/')[1, 2]
+    resource, id = request.path.split('/')[2, 3]
     @recommendable = resource.singularize.classify.constantize.find(id)
   end
 end
