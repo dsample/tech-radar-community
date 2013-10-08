@@ -8,7 +8,7 @@ class Company < ActiveRecord::Base
       message: '%{value} is already taken' },
     exclusion: { in: %w(www admin test), 
       message: '%{value} is reserved' },
-    format: { with: /\A[a-zA-Z0-9-_]+\z/, 
+    format: { with: /\A[a-zA-Z0-9\-_]+\z/, 
       message: 'must only contain letters, numbers, and may also include dash and underscore characters' },
     length: { within: 3..10, 
       message: 'must be between 3 and 10 characters' }
