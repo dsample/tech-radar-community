@@ -13,7 +13,21 @@ class Product < ActiveRecord::Base
   #before_destroy :confirm_orphan
 
   def used_technologies
-    product_technologies.select("technology_id, max(date(created_at)), state_id ").group("technology_id")
+    product_technologies
+      .select("technology_id, max(date(created_at)), state_id ")
+      .group("technology_id")
+
+
+
+    technologies.map {|x| 
+      pt = product_technologies
+        .where(:technology_id => x.id)
+        .order("created_at DESC")
+        .first
+
+      { name: x.name, product: x, state: pt.state.name }
+    }
+
   end
 
   def unused_technologies

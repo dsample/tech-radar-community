@@ -1,6 +1,6 @@
 <% if @product.product_technologies.count > 0 %>
 	<div class="striped bordered table large-12 columns">
-	<% @product.product_technologies.each do |usage| %>
+	<% @product.product_technologies.order("created_at DESC").each do |usage| %>
 
 	  <div class="row">
 	  	<div class="large-6 columns">
